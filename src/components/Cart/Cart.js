@@ -9,7 +9,6 @@ import CartItem from "./CartItem"
 import { Button } from "react-bootstrap"
 
 const Cart = props => {
-  console.log(props)
   let totalPrice = 0
   props.cart.map(item => {
     totalPrice = +item.price * item.quantity

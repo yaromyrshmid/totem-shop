@@ -51,8 +51,37 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-source-firebase`,
+      options: {
+        // point to the firebase private key downloaded
+        credential: {
+          type: process.env.FIREBASE_ACCESS_type,
+          project_id: process.env.FIREBASE_ACCESS_project_id,
+          private_key_id: process.env.FIREBASE_ACCESS_private_key_id,
+          private_key: process.env.FIREBASE_ACCESS_private_key,
+          client_email: process.env.FIREBASE_ACCESS_client_email,
+          client_id: process.env.FIREBASE_ACCESS_client_id,
+          auth_uri: process.env.FIREBASE_ACCESS_auth_uri,
+          token_uri: process.env.FIREBASE_ACCESS_token_uri,
+          auth_provider_x509_cert_url:
+            process.env.FIREBASE_ACCESS_auth_provider_x509_cert_url,
+          client_x509_cert_url:
+            process.env.FIREBASE_ACCESS_client_x509_cert_url,
+        },
+        // "./sena-totem-firebase-adminsdk-jqsci-2e9a906307.json",
+        // your firebase database root url
+        databaseURL: "https://sena-totem.firebaseio.com/",
+        // you can have multiple "types" that point to different paths
+        types: [
+          {
+            // this type will become `allWorkshop` in graphql
+            type: "shopComplects",
+            // the path to get the records from
+            path: "/",
+          },
+        ],
+      },
+    },
   ],
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { graphql, Link } from "gatsby"
 import { Row, Button } from "react-bootstrap"
 import styled from "gatsby-plugin-styled-components"
@@ -19,6 +19,39 @@ const Product = props => {
     data.product.colors ? data.product.colors[0] : null
   )
 
+  //Availability
+  const [available, setAvailable] = useState(true)
+  const availabilityFromSena = data.availabilitySena.edges[2].node.array.filter(
+    product => {
+      return product.name === data.product.name
+    }
+  )
+  //Disabling buy button for colors/products that are not available
+  useEffect(() => {
+    if (data.product.getAvailabilityFromSena && availabilityFromSena) {
+      setAvailable(false)
+      availabilityFromSena[0].colors.forEach(color => {
+        if (color.color === currentColor) {
+          if (color.quantity > 0) {
+            setAvailable(true)
+          }
+        }
+      })
+    }
+    if (data.product.notAvailable) {
+      setAvailable(false)
+    }
+    if (data.product.notAvailableColors) {
+      setAvailable(true)
+      data.product.notAvailableColors.forEach(color => {
+        if (color === currentColor) {
+          setAvailable(false)
+        }
+      })
+    }
+  }, [currentColor])
+
+  //Cart
   const handleAddToCart = () => {
     const item = {
       name: data.product.name,
@@ -64,13 +97,22 @@ const Product = props => {
                   defaultChecked={index === 0 ? true : false}
                   onChange={handleColorChange}
                 />
-                <label>{color}</label>
+                <label>
+                  {color}
+                  {data.product.notAvailableColors
+                    ? data.product.notAvailableColors.includes(color) && (
+                        <p>немає в наявності</p>
+                      )
+                    : null}
+                </label>
               </div>
             ))}
           </div>
         )}
 
-        <Button onClick={handleAddToCart}>Додати в кошик </Button>
+        <Button onClick={handleAddToCart} disabled={!available}>
+          {available ? "Додати в кошик" : "Немає в наявності"}
+        </Button>
       </div>
       <Carousel images={data.product.images} currentSlide={currentImage} />
       <YouMayAlsoLike
@@ -94,7 +136,6 @@ export const query = graphql`
       }
       category {
         category
-        slug
       }
       images {
         id
@@ -118,6 +159,9 @@ export const query = graphql`
           }
         }
       }
+      getAvailabilityFromSena
+      notAvailable
+      notAvailableColors
     }
 
     referenced: allContentfulProduct(
@@ -136,6 +180,20 @@ export const query = graphql`
           images {
             fluid {
               ...GatsbyContentfulFluid
+            }
+          }
+        }
+      }
+    }
+
+    availabilitySena: allShopComplects {
+      edges {
+        node {
+          array {
+            name
+            colors {
+              color
+              quantity
             }
           }
         }
