@@ -33,3 +33,9 @@ export const toggleCart = () => {
     type: actionTypes.TOOGLE_CART,
   }
 }
+
+export const clearCart = () => {
+  return {
+    type: actionTypes.CLEAR_CART,
+  }
+}

@@ -64,6 +64,11 @@ const reducer = (state = preloadedState, action) => {
         ...state,
         showCart: showCartToggled,
       }
+    case actionTypes.CLEAR_CART:
+      return {
+        ...state,
+        cart: [],
+      }
     default:
       return state
   }

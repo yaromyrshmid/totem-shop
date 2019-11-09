@@ -1,34 +1,53 @@
-import React from "react"
+import React, { useState } from "react"
 import { connect } from "react-redux"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CheckoutItem from "../components/Checkout/CheckoutItem"
+import CheckoutForm from "../components/Checkout/CheckoutForm"
 import * as actions from "../state/actions/cart"
 import { Button } from "react-bootstrap"
 
-const checkout = props => {
+const Checkout = props => {
+  const [orderNumber, setOrderNumber] = useState(null)
+
   let totalPrice = 0
   props.cart.map(item => {
     totalPrice += item.price * item.quantity
   })
+  console.log(orderNumber)
+
   return (
     <Layout>
       <SEO title="Checkout" />
-      <div>
-        Доставка та оплата замовлення: форма: ім*я та прізвище телефон чек-бокс
-        передзвонити для уточнення замовлення електронна адреса коментар
-        Доставка радіал вибір з 1 пунктом - Доставка по Україні "Новою поштою"
-        за тарифами Нової пошти 3 поля з вибором області, міста, відділення
-        Оплата радіал вибір з 1 пунктом: На картку Приват Банку Реквізити ...
-      </div>
-      <div>
-        {props.cart.map(item => (
-          <CheckoutItem key={`${item.id}-${item.color}`} item={item} />
-        ))}
-        <p>Загальна вартість: {totalPrice}</p>
-        <Button onClick={props.toggleCart}>Змінити замовлення</Button>
-      </div>
+      {props.cart.length > 0 && (
+        <div>
+          <div>
+            <CheckoutForm setOrderNumber={setOrderNumber} />
+          </div>
+          <div>
+            {props.cart.map(item => (
+              <CheckoutItem key={`${item.id}-${item.color}`} item={item} />
+            ))}
+            <p>Загальна вартість: {totalPrice}</p>
+            <Button onClick={props.toggleCart}>Змінити замовлення</Button>
+          </div>
+        </div>
+      )}
+      {orderNumber && (
+        <div>
+          <h6>
+            Дякуюємо, замовлення успішне! Номер замовлення:{orderNumber}.
+            Замовлення буде відправлено після отримання оплати. Реквізити: ...
+            Вказуйте номер замовлення.
+          </h6>
+        </div>
+      )}
+      {props.cart.length === 0 && !orderNumber && (
+        <div>
+          <h6>У вас ще немає обраних товарів.</h6>
+        </div>
+      )}
     </Layout>
   )
 }
@@ -48,4 +67,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(checkout)
+)(Checkout)

@@ -5,3 +5,4 @@ export const ADD_QUANTITY = "ADD_QUANTITY"
 export const SUBSTRACT_QUANTITY = "SUBSTRACT_QUANTITY"
 
 export const TOOGLE_CART = "TOOGLE_CART"
+export const CLEAR_CART = "CLEAR_CART"
