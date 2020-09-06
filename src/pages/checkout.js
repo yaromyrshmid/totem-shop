@@ -1,24 +1,24 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout/Layout"
 import SEO from "../components/seo"
 import CheckoutItem from "../components/Checkout/CheckoutItem"
 import CheckoutForm from "../components/Checkout/CheckoutForm"
 import * as actions from "../state/actions/cart"
 import { Button } from "react-bootstrap"
 
-const Checkout = props => {
+const Checkout = (props) => {
   const [orderNumber, setOrderNumber] = useState(null)
 
   let totalPrice = 0
-  props.cart.map(item => {
+  props.cart.map((item) => {
     totalPrice += item.price * item.quantity
   })
   console.log(orderNumber)
 
   return (
-    <Layout>
+    <Layout title="Checkout">
       <SEO title="Checkout" />
       {props.cart.length > 0 && (
         <div>
@@ -26,7 +26,7 @@ const Checkout = props => {
             <CheckoutForm setOrderNumber={setOrderNumber} />
           </div>
           <div>
-            {props.cart.map(item => (
+            {props.cart.map((item) => (
               <CheckoutItem key={`${item.id}-${item.color}`} item={item} />
             ))}
             <p>Загальна вартість: {totalPrice}</p>
@@ -52,19 +52,16 @@ const Checkout = props => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cart: state.cart,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     toggleCart: () => dispatch(actions.toggleCart()),
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Checkout)
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

@@ -12,6 +12,15 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-stripe`,
     {
+      resolve: `gatsby-plugin-material-ui`,
+      // TODO: Remove when not using styled components
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-react-redux`,
       options: {
         // [required] - path to your createStore module

@@ -4,14 +4,14 @@ import { Row, Button } from "react-bootstrap"
 import styled from "gatsby-plugin-styled-components"
 import { connect } from "react-redux"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout/Layout"
 import SEO from "../components/seo"
 import Title from "../components//UI/Title"
 import Carousel from "../components/Product/Carousel"
 import YouMayAlsoLike from "../components/Product/YouMayAlsoLike"
 import * as actions from "../state/actions/cart"
 
-const Product = props => {
+const Product = (props) => {
   const data = props.data
   console.log(data)
   const [currentImage, setCurrentImage] = useState(0)
@@ -29,9 +29,9 @@ const Product = props => {
   // )
   //Disabling buy button for colors/products that are not available
   useEffect(() => {
-    if (data.product.getAvailabilityFromSena && availabilityFromSena) {
+    if (data.product.getAvailabilityFromSena && availabilityFromSena.length) {
       setAvailable(false)
-      availabilityFromSena[0].colors.forEach(color => {
+      availabilityFromSena[0].colors.forEach((color) => {
         if (color.color === currentColor) {
           if (color.quantity > 0) {
             setAvailable(true)
@@ -44,7 +44,7 @@ const Product = props => {
     }
     if (data.product.notAvailableColors) {
       setAvailable(true)
-      data.product.notAvailableColors.forEach(color => {
+      data.product.notAvailableColors.forEach((color) => {
         if (color === currentColor) {
           setAvailable(false)
         }
@@ -63,23 +63,23 @@ const Product = props => {
       quantity: 1,
       slug: data.product.slug,
     }
-    if (!(props.cart.findIndex(product => product.id === item.id) > -1)) {
+    if (!(props.cart.findIndex((product) => product.id === item.id) > -1)) {
       props.addToCart(item)
     }
     props.toggleCart()
   }
 
-  const handleColorChange = event => {
+  const handleColorChange = (event) => {
     const activeImage = data.product.images.findIndex(
-      image => image.description === event.target.value
+      (image) => image.description === event.target.value
     )
     setCurrentImage(activeImage > -1 && activeImage)
     setCurrentColor(event.target.value)
   }
 
   return (
-    <Layout>
-      <SEO title="" />
+    <Layout title={data.product.name}>
+      <SEO title={data.product.name} />
       <div>
         <Link to="/shop">назад до Магазину</Link>
       </div>
@@ -203,20 +203,17 @@ export const query = graphql`
   }
 `
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cart: state.cart,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addToCart: item => dispatch(actions.addToCart(item)),
+    addToCart: (item) => dispatch(actions.addToCart(item)),
     toggleCart: () => dispatch(actions.toggleCart()),
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Product)
+export default connect(mapStateToProps, mapDispatchToProps)(Product)

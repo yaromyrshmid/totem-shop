@@ -2,15 +2,15 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Row } from "react-bootstrap"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout/Layout"
 import SEO from "../components/seo"
 import ProductPreview from "../components/Shop/ProductPreview"
 import Title from "../components//UI/Title"
 
 const Category = ({ data }) => {
   return (
-    <Layout>
-      <SEO title="" />
+    <Layout title={data.name}>
+      <SEO title={data.name} />
       <Title title={data.category.category} />
       <Row>
         {data.products.edges.map(({ node }) => {
