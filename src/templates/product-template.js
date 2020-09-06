@@ -21,11 +21,12 @@ const Product = props => {
 
   //Availability
   const [available, setAvailable] = useState(true)
-  const availabilityFromSena = data.availabilitySena.edges[2].node.array.filter(
-    product => {
-      return product.name === data.product.name
-    }
-  )
+  const availabilityFromSena = []
+  // const availabilityFromSena = data.availabilitySena.edges[2].node.array.filter(
+  //   product => {
+  //     return product.name === data.product.name
+  //   }
+  // )
   //Disabling buy button for colors/products that are not available
   useEffect(() => {
     if (data.product.getAvailabilityFromSena && availabilityFromSena) {
