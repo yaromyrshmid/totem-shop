@@ -7,8 +7,8 @@ import HeroSlider from "../components/Home/HeroSlider"
 import Shop from "../components/Shop/Shop"
 
 const IndexPage = () => (
-  <Layout title="Home">
-    <SEO title="Home" />
+  <Layout title="TotemNotes">
+    <SEO title="TotemNotes" />
     <HeroSlider />
     <p>Фільтер з категоріями </p>
     <Shop />

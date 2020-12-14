@@ -6,13 +6,19 @@ import Header from "./Header"
 import Drawer from "./Drawer"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Footer from "./Footer"
+import { useMediaQuery, useTheme } from "@material-ui/core"
 
 const Layout = ({ children, cart, title }) => {
+  const theme = useTheme()
+  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"))
+
   const [showDrawer, setShowDrawer] = useState(false)
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
-  }, [cart])
+    if (isDesktop) {
+      setShowDrawer(false)
+    }
+  }, [isDesktop])
 
   const handleCloseDrawer = () => {
     setShowDrawer(false)
@@ -25,7 +31,11 @@ const Layout = ({ children, cart, title }) => {
   return (
     <>
       <Header openDrawer={handleOpenDrawer} pageTitle={title} />
-      <Drawer showDrawer={showDrawer} closeDrawer={handleCloseDrawer} />
+
+      {!isDesktop && (
+        <Drawer showDrawer={showDrawer} closeDrawer={handleCloseDrawer} />
+      )}
+
       {children}
       <Footer />
     </>

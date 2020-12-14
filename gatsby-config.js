@@ -9,6 +9,7 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    `custom-mui-theme`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-stripe`,
     {
@@ -68,7 +69,7 @@ module.exports = {
           type: process.env.FIREBASE_ACCESS_type,
           project_id: process.env.FIREBASE_ACCESS_project_id,
           private_key_id: process.env.FIREBASE_ACCESS_private_key_id,
-          private_key: process.env.FIREBASE_ACCESS_private_key.replace(
+          private_key: process.env.FIREBASE_ACCESS_private_key?.replace(
             /\\n/gm,
             "\n"
           ),

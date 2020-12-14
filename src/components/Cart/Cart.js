@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import { Link } from "gatsby"
 import Modal from "react-responsive-modal"
@@ -7,17 +7,25 @@ import * as actions from "../../state/actions/cart"
 
 import CartItem from "./CartItem"
 import { Button } from "react-bootstrap"
+import CartHeaderButton from "./CartHeaderButton"
 
-const Cart = props => {
+const Cart = (props) => {
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(props.cart))
+  }, [props.cart])
+
   let totalPrice = 0
-  props.cart.map(item => {
+  props.cart.map((item) => {
     totalPrice = +item.price * item.quantity
   })
+
   return (
     <div>
-      <div onClick={props.toggleCart}>
-        <h2>cart {props.cart.length}</h2>
-      </div>
+      <CartHeaderButton
+        onClick={props.toggleCart}
+        itemCount={props.cart?.length}
+      />
+
       <Modal
         styles={{
           modal: {
@@ -30,7 +38,7 @@ const Cart = props => {
         closeOnOverlayClick
       >
         <CartContentWrapper>
-          {props.cart.map(item => (
+          {props.cart.map((item) => (
             <CartItem key={`${item.id}-${item.color}`} item={item} />
           ))}
           <p>Загальна вартість: {totalPrice}</p>
@@ -46,14 +54,15 @@ const Cart = props => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
+  console.log(state)
   return {
-    cart: state.cart,
-    showCart: state.showCart,
+    cart: state.cart.items,
+    showCart: state.cart.showCart,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     toggleCart: () => dispatch(actions.toggleCart()),
   }
@@ -61,7 +70,4 @@ const mapDispatchToProps = dispatch => {
 
 const CartContentWrapper = styled.div``
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart)
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
