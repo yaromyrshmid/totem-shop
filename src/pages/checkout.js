@@ -15,7 +15,6 @@ const Checkout = (props) => {
   props.cart.map((item) => {
     totalPrice += item.price * item.quantity
   })
-  console.log(orderNumber)
 
   return (
     <Layout title="Checkout">
@@ -54,7 +53,7 @@ const Checkout = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
+    cart: state.cart.items,
   }
 }
 

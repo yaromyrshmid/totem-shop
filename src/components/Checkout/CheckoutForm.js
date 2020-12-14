@@ -6,7 +6,7 @@ import axios from "../axios/axios"
 import novaposhtaaxios from "../axios/novaposhta"
 import * as actions from "../../state/actions/cart"
 
-const CheckoutForm = props => {
+const CheckoutForm = (props) => {
   //Creating empty lists
   const [regions, setRegions] = useState([])
   const [cities, setCities] = useState([])
@@ -33,10 +33,10 @@ const CheckoutForm = props => {
         calledMethod: "getAreas",
       },
     })
-      .then(response => {
+      .then((response) => {
         setRegions(response.data.data)
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error))
   }, [])
   //Requesting cities
   useEffect(() => {
@@ -51,10 +51,10 @@ const CheckoutForm = props => {
         calledMethod: "getCities",
       },
     })
-      .then(response => {
+      .then((response) => {
         setCities(response.data.data)
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error))
   }, [])
   //Requesting post offices
   useEffect(() => {
@@ -69,35 +69,37 @@ const CheckoutForm = props => {
         calledMethod: "getWarehouses",
       },
     })
-      .then(response => {
+      .then((response) => {
         setPostOffices(response.data.data)
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error))
   }, [])
   //Filtering cities after region changes
   useEffect(() => {
-    const citiesOfRegion = cities.filter(city => city.Area === currentRegion)
+    const citiesOfRegion = cities.filter((city) => city.Area === currentRegion)
     setCitiesFiltered(citiesOfRegion)
   }, [currentRegion])
   //Filtering post offices after city changes
   useEffect(() => {
     const postOfficesOfCity = postOffices.filter(
-      office => office.CityRef === currentCity
+      (office) => office.CityRef === currentCity
     )
     setPostOfficesFiltered(postOfficesOfCity)
   }, [currentCity])
   //Getting region center after region changes
   useEffect(() => {
-    const newRegionCenter = cities.filter(city => regionCenterRef === city.Ref)
+    const newRegionCenter = cities.filter(
+      (city) => regionCenterRef === city.Ref
+    )
     if (newRegionCenter && newRegionCenter.length > 0) {
       setRegionCenter(newRegionCenter[0])
     }
   }, [currentRegion])
   //Setting current region on region change, reseting current city to trigger new filtering of post offices
-  const handleRegionChange = newRegion => {
+  const handleRegionChange = (newRegion) => {
     setCurrentCity("")
     const newCurrentRegion = regions.filter(
-      region => newRegion === region.Description
+      (region) => newRegion === region.Description
     )
     if (newCurrentRegion && newCurrentRegion.length > 0) {
       setCurrentRegion(newCurrentRegion[0].Ref)
@@ -108,9 +110,9 @@ const CheckoutForm = props => {
     }
   }
   //Setting current city to trigger filtering of post offices
-  const handleCityChange = newCity => {
+  const handleCityChange = (newCity) => {
     const newCurrentCity = citiesFiltered.filter(
-      city => newCity === city.Description
+      (city) => newCity === city.Description
     )
     if (newCurrentCity && newCurrentCity.length > 0) {
       setCurrentCity(newCurrentCity[0].Ref)
@@ -131,7 +133,7 @@ const CheckoutForm = props => {
         postOffice: "",
         payment: "На картку Приват Банку",
       }}
-      validate={values => {
+      validate={(values) => {
         let errors = {}
         if (values.name.length < 4) {
           errors.name = "Будь ласка, вкажіть справжні ім'я та прізвище."
@@ -156,7 +158,7 @@ const CheckoutForm = props => {
         console.log(values)
         axios
           .post("/orders.json", values)
-          .then(response => {
+          .then((response) => {
             values.number = `${new Date()
               .toISOString()
               .split("T")[0]
@@ -168,7 +170,7 @@ const CheckoutForm = props => {
             setSubmitting(false)
             props.setOrderNumber(values.number)
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error.response)
             setSubmitting(false)
           })
@@ -210,7 +212,7 @@ const CheckoutForm = props => {
             as="select"
             name="region"
             //Passing value to form values, handling change of current region, reseting city and post office values
-            onChange={event => {
+            onChange={(event) => {
               values.region = event.target.value
               handleRegionChange(event.target.value)
               values.city = ""
@@ -219,7 +221,7 @@ const CheckoutForm = props => {
           >
             <option value="">--Оберіть область--</option>
             {regions &&
-              regions.map(item => {
+              regions.map((item) => {
                 return (
                   <option key={item.Ref} value={item.Description}>
                     {item.Description}
@@ -236,7 +238,7 @@ const CheckoutForm = props => {
             as="select"
             name="city"
             //Passing value to form values, handling change of current city, reseting post office value
-            onChange={event => {
+            onChange={(event) => {
               values.city = event.target.value
               handleCityChange(event.target.value)
               values.postOffice = ""
@@ -249,7 +251,7 @@ const CheckoutForm = props => {
               </option>
             )}
             {citiesFiltered && citiesFiltered.length > 0
-              ? citiesFiltered.map(item => {
+              ? citiesFiltered.map((item) => {
                   return (
                     <option key={item.Ref} value={item.Description}>
                       {item.Description}
@@ -266,7 +268,7 @@ const CheckoutForm = props => {
           <Field name="postOffice" as="select">
             <option value="">--Оберіть відділення--</option>
             {postOfficesFiltered && postOfficesFiltered.length > 0
-              ? postOfficesFiltered.map(item => {
+              ? postOfficesFiltered.map((item) => {
                   return (
                     <option key={item.Ref} value={item.Description}>
                       {item.Description}
@@ -290,19 +292,16 @@ const CheckoutForm = props => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
+    cart: state.cart.items,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     clearCart: () => dispatch(actions.clearCart()),
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CheckoutForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutForm)

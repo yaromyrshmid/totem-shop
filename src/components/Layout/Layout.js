@@ -48,7 +48,7 @@ Layout.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
+    cart: state.cart.items,
   }
 }
 

@@ -13,7 +13,7 @@ import * as actions from "../state/actions/cart"
 
 const Product = (props) => {
   const data = props.data
-  console.log(data)
+
   const [currentImage, setCurrentImage] = useState(0)
   const [currentColor, setCurrentColor] = useState(
     data.product.colors ? data.product.colors[0] : null
@@ -205,7 +205,7 @@ export const query = graphql`
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
+    cart: state.cart.items,
   }
 }
 
