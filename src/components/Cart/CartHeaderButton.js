@@ -2,9 +2,9 @@ import React from "react"
 import { Box, IconButton, makeStyles, Typography } from "@material-ui/core"
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket"
 
-const CartHeaderButton = ({ onClick }) => {
+const CartHeaderButton = ({ onClick, itemCount }) => {
   const classes = useStyles()
-  const itemCount = 5
+
   return (
     <IconButton
       aria-label="open drawer"
