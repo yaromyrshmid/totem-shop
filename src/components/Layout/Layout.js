@@ -7,8 +7,9 @@ import Drawer from "./Drawer"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Footer from "./Footer"
 import { useMediaQuery, useTheme } from "@material-ui/core"
+import SEO from "./seo"
 
-const Layout = ({ children, cart, title }) => {
+const Layout = ({ children, title }) => {
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"))
 
@@ -30,6 +31,8 @@ const Layout = ({ children, cart, title }) => {
 
   return (
     <>
+      <SEO title={title} />
+
       <Header openDrawer={handleOpenDrawer} pageTitle={title} />
 
       {!isDesktop && (

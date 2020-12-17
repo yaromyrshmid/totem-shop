@@ -5,7 +5,7 @@ import { Row } from "react-bootstrap"
 import Layout from "../components/Layout/Layout"
 import SEO from "../components/seo"
 import ProductPreview from "../components/Shop/ProductPreview"
-import Title from "../components//UI/Title"
+import Title from "../components/ui/Title"
 
 const Category = ({ data }) => {
   return (
