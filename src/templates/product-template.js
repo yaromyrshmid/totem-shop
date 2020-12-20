@@ -132,9 +132,6 @@ export const query = graphql`
       slug
       price
       colors
-      description {
-        json
-      }
       category {
         category
       }
@@ -161,7 +158,6 @@ export const query = graphql`
         }
       }
       getAvailabilityFromSena
-      notAvailable
       notAvailableColors
     }
 
