@@ -11,7 +11,6 @@ module.exports = {
   },
   plugins: [
     `custom-mui-theme`,
-    `gatsby-plugin-postcss`,
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,

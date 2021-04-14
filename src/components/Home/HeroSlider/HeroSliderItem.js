@@ -7,11 +7,11 @@ import CustomLink from "../../ui/CustomLink"
 
 const TextContent = ({ title, subtitle }) => (
   <>
-    <Typography variant="h2" component="h1" color="secondary">
+    <Typography variant="h2" component="h1" color="primary">
       {title}
     </Typography>
 
-    <Typography variant="h3" component="h2" color="primary">
+    <Typography variant="h3" component="h2" color="secondary">
       {subtitle}
     </Typography>
   </>

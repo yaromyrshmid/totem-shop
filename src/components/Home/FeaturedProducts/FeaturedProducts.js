@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { Box, Container, Grid, makeStyles, Typography } from "@material-ui/core"
 import { useStaticQuery, graphql } from "gatsby"
 import ProductItem from "../../Shop/ProductItem"
+import Carousel from "../../ui/Carousel"
 
 const getFeaturedProducts = graphql`
   query {
@@ -41,6 +42,18 @@ const FeaturedProducts = ({}) => {
           Новинки:
         </Typography>
       </Box>
+
+      <Carousel
+        slidesToScroll={3}
+        slidesToShow={3}
+        arrows={false}
+        autoplay
+        autoplaySpeed={6000}
+      >
+        {products.map((product) => (
+          <ProductItem product={product} key={product.id} />
+        ))}
+      </Carousel>
 
       <Grid container spacing={3}>
         {products.map((product) => (

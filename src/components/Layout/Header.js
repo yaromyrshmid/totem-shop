@@ -15,7 +15,7 @@ const Header = ({ pageTitle, openDrawer }) => {
   const classes = useStyles()
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="transparent">
       <Toolbar>
         <LinkedLogo />
 

@@ -1,11 +1,10 @@
 import React from "react"
 import { Link } from "gatsby"
-import { Box, makeStyles, Typography, useTheme } from "@material-ui/core"
+import { Box, makeStyles, Typography } from "@material-ui/core"
 import classnames from "classnames"
 
 const NavItems = ({ inDrawer }) => {
   const classes = useStyles()
-  const theme = useTheme()
 
   return (
     <Box
@@ -16,7 +15,7 @@ const NavItems = ({ inDrawer }) => {
     >
       <Link
         to="/shop"
-        activeStyle={{ color: theme.palette.secondary.main }}
+        activeClassName={classes.activeItem}
         className={classnames(classes.item, inDrawer && classes.itemInDrawer)}
       >
         <Typography variant={inDrawer ? "h5" : "h6"}>Магазин</Typography>
@@ -24,7 +23,7 @@ const NavItems = ({ inDrawer }) => {
 
       <Link
         to="/about-us"
-        activeStyle={{ color: theme.palette.secondary.main }}
+        activeClassName={classes.activeItem}
         className={classnames(classes.item, inDrawer && classes.itemInDrawer)}
       >
         <Typography variant={inDrawer ? "h5" : "h6"}>Про нас</Typography>
@@ -43,12 +42,15 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     textDecoration: "none",
-    color: theme.palette.common.white,
+    color: theme.palette.text.primary,
     marginRight: theme.spacing(4),
     "&:hover": {
       textDecoration: "none",
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
     },
+  },
+  activeItem: {
+    color: theme.palette.primary.main,
   },
   containerInDrawer: {
     display: "flex",

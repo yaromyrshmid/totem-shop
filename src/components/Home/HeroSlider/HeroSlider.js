@@ -1,9 +1,8 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { Carousel } from "react-responsive-carousel"
-import "react-responsive-carousel/lib/styles/carousel.min.css" // requires a loader
 
 import HeroSliderItem from "./HeroSliderItem"
+import Carousel from "../../ui/Carousel"
 
 const getHeroSliders = graphql`
   query {
@@ -34,15 +33,11 @@ const HeroSlider = () => {
 
   return (
     <Carousel
-      swipeable
-      emulateTouch
-      infiniteLoop
-      showIndicators
-      showStatus={false}
-      showThumbs={false}
-      stopOnHover
-      autoPlay
-      interval={4000}
+      slidesToScroll={1}
+      slidesToShow={1}
+      arrows={false}
+      autoplay
+      autoplaySpeed={4000}
     >
       {heroSliders.map((item) => (
         <HeroSliderItem item={item} key={item.id} />
