@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
+import CssBaseline from "@material-ui/core/CssBaseline"
 
 import Header from "./Header"
 import Drawer from "./Drawer"
-import "bootstrap/dist/css/bootstrap.min.css"
 import Footer from "./Footer"
 import { useMediaQuery, useTheme } from "@material-ui/core"
 import SEO from "./seo"
@@ -31,6 +31,8 @@ const Layout = ({ children, title }) => {
 
   return (
     <>
+      <CssBaseline />
+
       <SEO title={title} />
 
       <Header openDrawer={handleOpenDrawer} pageTitle={title} />

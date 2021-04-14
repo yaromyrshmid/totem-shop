@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Box, Container, Grid, makeStyles, Typography } from "@material-ui/core"
-import { useStaticQuery } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import ProductItem from "../../Shop/ProductItem"
 
 const getFeaturedProducts = graphql`

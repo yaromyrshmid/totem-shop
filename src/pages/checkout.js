@@ -18,7 +18,7 @@ const Checkout = (props) => {
 
   return (
     <Layout title="Checkout">
-      <SEO title="Checkout" />
+      {/* <SEO title="Checkout" />
       {props.cart.length > 0 && (
         <div>
           <div>
@@ -46,7 +46,7 @@ const Checkout = (props) => {
         <div>
           <h6>У вас ще немає обраних товарів.</h6>
         </div>
-      )}
+      )} */}
     </Layout>
   )
 }

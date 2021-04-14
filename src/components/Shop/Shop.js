@@ -53,7 +53,7 @@ const Shop = () => {
       <Grid container>
         {data?.products?.edges?.map(({ node }) => (
           <Grid item key={node.id}>
-            {/* <ProductItem product={node} /> */}
+            <ProductItem product={node} />
           </Grid>
         ))}
       </Grid>

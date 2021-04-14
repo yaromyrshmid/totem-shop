@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography"
 import MenuIcon from "@material-ui/icons/Menu"
 import IconButton from "@material-ui/core/IconButton"
 
-import Cart from "../Cart/Cart"
+// import Cart from "../Cart/Cart"
 import LinkedLogo from "./Shared/LinkedLogo"
 import NavItems from "./Shared/NavItems"
 
@@ -25,7 +25,7 @@ const Header = ({ pageTitle, openDrawer }) => {
 
         <NavItems />
 
-        <Cart />
+        {/* <Cart /> */}
 
         <IconButton
           className={classes.menuButton}
