@@ -1,26 +1,13 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import { makeStyles } from "@material-ui/core"
 
 const CustomLink = ({ children, ...props }) => {
-  const classes = useStyles()
-
   return (
-    <Link className={classes.link} {...props}>
+    <Link {...props} style={{ textDecoration: "none" }}>
       {children}
     </Link>
   )
 }
-
-const useStyles = makeStyles(() => ({
-  link: {
-    textDecoration: "none",
-    "&:hover": {
-      textDecoration: "none",
-    },
-  },
-}))
 
 CustomLink.propTypes = {}
 

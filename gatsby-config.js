@@ -98,5 +98,12 @@ module.exports = {
     //     ],
     //   },
     // },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: ["PT Sans:400,700", "Raleway:400,600,800"],
+        display: "swap",
+      },
+    },
   ],
 }

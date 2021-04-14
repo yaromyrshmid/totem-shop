@@ -14,6 +14,7 @@ const getHeroSliders = graphql`
           title
           subtitle
           position
+          textAlign
           link
           image {
             fluid(maxWidth: 4000) {
