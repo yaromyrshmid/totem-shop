@@ -6,10 +6,10 @@ import { connect } from "react-redux"
 
 import Layout from "../components/Layout/Layout"
 import SEO from "../components/seo"
-import Title from "../components/ui/Title"
 import Carousel from "../components/Product/Carousel"
 import YouMayAlsoLike from "../components/Product/YouMayAlsoLike"
 import * as actions from "../state/actions/cart"
+import Title from "../components/ui/Title"
 
 const Product = (props) => {
   const data = props.data

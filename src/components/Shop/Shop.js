@@ -2,7 +2,8 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import ProductPreview from "./ProductPreview"
-import { Container, Row } from "react-bootstrap"
+import { Grid, Container } from "@material-ui/core"
+import ProductItem from "./ProductItem"
 
 const getData = graphql`
   query {
@@ -32,7 +33,7 @@ const getData = graphql`
           id
           name
           price
-          images {
+          mainImage {
             fluid(maxWidth: 800) {
               ...GatsbyContentfulFluid
             }
@@ -45,14 +46,17 @@ const getData = graphql`
 
 const Shop = () => {
   const data = useStaticQuery(getData)
+  console.log(data)
 
   return (
     <Container>
-      <Row>
-        {data.products.edges.map(({ node }) => (
-          <ProductPreview key={node.id} product={node} />
+      <Grid container>
+        {data?.products?.edges?.map(({ node }) => (
+          <Grid item key={node.id}>
+            {/* <ProductItem product={node} /> */}
+          </Grid>
         ))}
-      </Row>
+      </Grid>
     </Container>
   )
 }
