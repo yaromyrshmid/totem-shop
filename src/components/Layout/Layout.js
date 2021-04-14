@@ -7,7 +7,7 @@ import Header from "./Header"
 import Drawer from "./Drawer"
 import Footer from "./Footer"
 import { useMediaQuery, useTheme } from "@material-ui/core"
-import SEO from "./seo"
+import SEO from "./SEO"
 
 const Layout = ({ children, title }) => {
   const theme = useTheme()

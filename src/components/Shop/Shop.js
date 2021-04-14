@@ -1,7 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import ProductPreview from "./ProductPreview"
 import { Grid, Container } from "@material-ui/core"
 import ProductItem from "./ProductItem"
 

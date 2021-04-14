@@ -47,6 +47,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "eslint": "^7.24.0",
     "prettier": "^2.2.1"
   },
   "keywords": [

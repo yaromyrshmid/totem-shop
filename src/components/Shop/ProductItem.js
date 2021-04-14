@@ -4,8 +4,8 @@ import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core"
 import BackgroundImage from "gatsby-background-image"
 import classnames from "classnames"
 
-import CustomLink from "../ui/CustomLink"
 import { addToCart } from "../../state/actions/cart"
+import CustomLink from "../ui/CustomLink"
 
 const ProductItem = ({
   product: {
