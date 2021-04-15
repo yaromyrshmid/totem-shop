@@ -92,14 +92,6 @@ const FeaturedProducts = ({}) => {
           ))}
         </Carousel>
       </Box>
-
-      <Grid container spacing={3}>
-        {products.map((product) => (
-          <Grid item xs={12} lg={6} key={product.id}>
-            <ProductItem product={product} />
-          </Grid>
-        ))}
-      </Grid>
     </>
   )
 }
@@ -111,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
   },
   featuredItemContainer: {
     padding: theme.spacing(3),
+    paddingBottom: theme.spacing(6),
   },
 }))
 

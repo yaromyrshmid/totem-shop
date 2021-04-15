@@ -18,6 +18,7 @@ module.exports = {
     `gatsby-plugin-stripe`,
     `gatsby-plugin-playground`,
     `gatsby-plugin-postcss`,
+    `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-plugin-material-ui`,
       // TODO: Remove when not using styled components

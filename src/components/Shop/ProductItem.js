@@ -33,9 +33,9 @@ const ProductItem = ({
   )
 
   return (
-    <Box className={containerClassName}>
+    <Box className={classnames(classes.cardContainer, containerClassName)}>
       <LinkComponent to={`/shop/${slug}`}>
-        <Paper className={classes.container} component="article">
+        <Paper className={classes.paper} component="article">
           <Box className={classes.imageContainer}>
             <BackgroundImage
               Tag="div"
@@ -72,10 +72,13 @@ const ProductItem = ({
 }
 
 const useStyles = makeStyles((theme) => ({
-  container: {
+  cardContainer: {
     width: "100%",
+  },
+  paper: {
+    width: "100%",
+    overflow: "hidden",
     height: 540,
-    boxShadow: "0px 14px 32px 0px rgba(0, 0, 0, 0.15)",
     display: "flex",
     flexDirection: "column",
     transition: "box-shadow 600ms",
