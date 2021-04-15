@@ -1,6 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Box, Container, Grid, makeStyles, Typography } from "@material-ui/core"
+import {
+  Box,
+  Container,
+  Grid,
+  makeStyles,
+  Typography,
+  useTheme,
+} from "@material-ui/core"
 import { useStaticQuery, graphql } from "gatsby"
 import ProductItem from "../../Shop/ProductItem"
 import Carousel from "../../ui/Carousel"
@@ -30,30 +37,61 @@ const getFeaturedProducts = graphql`
 
 const FeaturedProducts = ({}) => {
   const classes = useStyles()
+  const {
+    breakpoints: { values: breakpoints },
+  } = useTheme()
 
   const products = useStaticQuery(getFeaturedProducts).products.edges.map(
     ({ node }) => node
   )
 
   return (
-    <Container className={classes.container} component="section">
-      <Box mb={2}>
-        <Typography variant="h4" component="h2">
-          Новинки:
-        </Typography>
-      </Box>
+    <>
+      <Container>
+        <Box mt={4}>
+          <Typography variant="h4" component="h2">
+            Новинки:
+          </Typography>
+        </Box>
+      </Container>
 
-      <Carousel
-        slidesToScroll={3}
-        slidesToShow={3}
-        arrows={false}
-        autoplay
-        autoplaySpeed={6000}
-      >
-        {products.map((product) => (
-          <ProductItem product={product} key={product.id} />
-        ))}
-      </Carousel>
+      <Box>
+        <Carousel
+          slidesToScroll={1}
+          slidesToShow={1}
+          arrows={false}
+          infinite={false}
+          responsive={[
+            {
+              breakpoint: breakpoints.sm,
+              settings: {
+                slidesToShow: 1,
+              },
+            },
+            {
+              breakpoint: breakpoints.lg,
+              settings: {
+                slidesToShow: 2,
+              },
+            },
+            {
+              breakpoint: 10000,
+              settings: {
+                slidesToShow: 3,
+              },
+            },
+          ]}
+        >
+          {products.map((product) => (
+            <ProductItem
+              product={product}
+              key={product.id}
+              useNativeLinking
+              containerClassName={classes.featuredItemContainer}
+            />
+          ))}
+        </Carousel>
+      </Box>
 
       <Grid container spacing={3}>
         {products.map((product) => (
@@ -62,7 +100,7 @@ const FeaturedProducts = ({}) => {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </>
   )
 }
 
@@ -70,6 +108,9 @@ const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(6),
+  },
+  featuredItemContainer: {
+    padding: theme.spacing(3),
   },
 }))
 

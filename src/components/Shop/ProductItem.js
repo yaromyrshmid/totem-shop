@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { useDispatch } from "react-redux"
 import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core"
 import BackgroundImage from "gatsby-background-image"
@@ -6,6 +6,7 @@ import classnames from "classnames"
 
 import { addToCart } from "../../state/actions/cart"
 import CustomLink from "../ui/CustomLink"
+import NativeLink from "../ui/NativeLink"
 
 const ProductItem = ({
   product: {
@@ -15,6 +16,8 @@ const ProductItem = ({
     price,
     id,
   },
+  useNativeLinking,
+  containerClassName,
 }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -24,40 +27,47 @@ const ProductItem = ({
     dispatch(addToCart(id))
   }
 
+  const LinkComponent = useMemo(
+    () => (useNativeLinking ? NativeLink : CustomLink),
+    [slug, useNativeLinking]
+  )
+
   return (
-    <CustomLink to={`/shop/${slug}`}>
-      <Paper className={classes.container} component="article">
-        <Box className={classes.imageContainer}>
-          <BackgroundImage
-            Tag="div"
-            fluid={mainImage}
-            className={classnames(classes.image, "product-item-image")}
-          />
-        </Box>
-
-        <Box className={classes.content}>
-          <Box className={classes.action}>
-            <Typography variant="h4" component="h3" color="secondary">
-              {name}
-            </Typography>
-
-            <Typography variant="h5" component="p">
-              {price} грн.
-            </Typography>
+    <Box className={containerClassName}>
+      <LinkComponent to={`/shop/${slug}`}>
+        <Paper className={classes.container} component="article">
+          <Box className={classes.imageContainer}>
+            <BackgroundImage
+              Tag="div"
+              fluid={mainImage}
+              className={classnames(classes.image, "product-item-image")}
+            />
           </Box>
 
-          <Button
-            size="large"
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            onClick={handleAddToCart}
-          >
-            В кошик
-          </Button>
-        </Box>
-      </Paper>
-    </CustomLink>
+          <Box className={classes.content}>
+            <Box className={classes.action}>
+              <Typography variant="h4" component="h3" color="secondary">
+                {name}
+              </Typography>
+
+              <Typography variant="h5" component="p">
+                {price} грн.
+              </Typography>
+            </Box>
+
+            <Button
+              size="large"
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              onClick={handleAddToCart}
+            >
+              В кошик
+            </Button>
+          </Box>
+        </Paper>
+      </LinkComponent>
+    </Box>
   )
 }
 

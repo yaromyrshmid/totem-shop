@@ -17,6 +17,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-stripe`,
     `gatsby-plugin-playground`,
+    `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-material-ui`,
       // TODO: Remove when not using styled components
