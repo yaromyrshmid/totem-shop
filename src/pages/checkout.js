@@ -6,7 +6,6 @@ import SEO from "../components/seo"
 import CheckoutItem from "../components/Checkout/CheckoutItem"
 import CheckoutForm from "../components/Checkout/CheckoutForm"
 import * as actions from "../state/actions/cart"
-import { Button } from "react-bootstrap"
 
 const Checkout = (props) => {
   const [orderNumber, setOrderNumber] = useState(null)

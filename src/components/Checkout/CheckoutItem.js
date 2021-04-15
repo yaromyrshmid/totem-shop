@@ -1,23 +1,23 @@
 import React from "react"
-import { Row, Col, Button } from "react-bootstrap"
 import Image from "gatsby-image"
 import { Link } from "gatsby"
+import { Grid } from "@material-ui/core"
 
-const CheckoutItem = props => {
+const CheckoutItem = (props) => {
   const item = props.item
   return (
-    <Row>
-      <Col>
+    <Grid container>
+      <Grid item>
         <Image fluid={item.image.fluid} />
-      </Col>
-      <Col>
+      </Grid>
+      <Grid item>
         <Link to={`/shop/${item.slug}`}>{item.name}</Link>
-      </Col>
-      <Col>{item.price}</Col>
-      <Col>{item.color}</Col>
-      <Col>{item.quantity}</Col>
-      <Col>Загальна вартість:{item.price * item.quantity}</Col>
-    </Row>
+      </Grid>
+      <Grid item>{item.price}</Grid>
+      <Grid item>{item.Gridor}</Grid>
+      <Grid item>{item.quantity}</Grid>
+      <Grid item>Загальна вартість:{item.price * item.quantity}</Grid>
+    </Grid>
   )
 }
 
