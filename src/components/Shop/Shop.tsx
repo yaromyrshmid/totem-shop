@@ -1,16 +1,14 @@
-import React, { useState } from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import { Grid, Container } from "@material-ui/core"
+import React, { useState } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+import { Grid, Container } from '@material-ui/core';
 
-import ProductItem from "./ProductItem"
-import FilterPanel from "./components/FilterPanel"
-import { ICategory, ICategoryNode } from "../../types/Category"
+import ProductItem from './ProductItem';
+import FilterPanel from './components/FilterPanel';
+import { Category, ICategoryNode } from '../../types/Category';
 
 const getData = graphql`
   query {
-    categories: allContentfulCategories(
-      sort: { fields: createdAt, order: DESC }
-    ) {
+    categories: allContentfulCategories(sort: { fields: createdAt, order: DESC }) {
       edges {
         node {
           category
@@ -44,41 +42,40 @@ const getData = graphql`
       }
     }
   }
-`
+`;
 
 interface ShopData {
-  products: { edges: Array<any> }
-  categories: { edges: Array<ICategoryNode> }
+  products: { edges: Array<any> };
+  categories: { edges: Array<ICategoryNode> };
 }
 
 const Shop = () => {
   const {
     categories: { edges: categoriesEdges },
-    products: { edges: products },
-  }: ShopData = useStaticQuery(getData)
-  const categories: Array<ICategory> = categoriesEdges.map(({ node }) => node)
+    products: { edges: products }
+  }: ShopData = useStaticQuery(getData);
+  const categories: Array<Category> = categoriesEdges.map(({ node }) => node);
 
-  console.log(products, categories)
-  const [filteredProducts, setFilteredProducts] = useState(products)
-  const [selectedCategory, setSelectedCategory] = useState("")
+  console.log(products, categories);
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleCategorySelect = (categoryId: string) => {
-    console.log(categoryId)
     if (categoryId) {
       setFilteredProducts(
         products.filter(
           ({
             node: {
-              category: { id },
-            },
+              category: { id }
+            }
           }) => id === categoryId
         )
-      )
+      );
     } else {
-      setFilteredProducts(products)
+      setFilteredProducts(products);
     }
-    setSelectedCategory(categoryId)
-  }
+    setSelectedCategory(categoryId);
+  };
 
   return (
     <Container>
@@ -96,7 +93,7 @@ const Shop = () => {
         ))}
       </Grid>
     </Container>
-  )
-}
+  );
+};
 
-export default Shop
+export default Shop;
