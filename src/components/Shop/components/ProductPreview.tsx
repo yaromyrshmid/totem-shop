@@ -1,10 +1,8 @@
 import React, { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
-import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Box, makeStyles, Typography } from '@material-ui/core';
 import BackgroundImage from 'gatsby-background-image';
 import classnames from 'classnames';
 
-import { addToCart } from '../../../state/actions/cart';
 import CustomLink from '../../ui/CustomLink';
 import NativeLink from '../../ui/NativeLink';
 import { ProductPreview as ProductPreviewType } from '../../../types/Product';
@@ -20,18 +18,12 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({
     slug,
     mainImage: { fluid: mainImage },
     name,
-    price,
-    id
+    price
   },
   useNativeLinking,
   containerClassName
 }: ProductPreviewProps): JSX.Element => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const handleAddToCart = () => {
-    dispatch(addToCart(id));
-  };
 
   const LinkComponent = useMemo(() => (useNativeLinking ? NativeLink : CustomLink), [
     slug,
@@ -41,7 +33,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({
   return (
     <Box className={classnames(classes.cardContainer, containerClassName)}>
       <LinkComponent to={`/shop/${slug}`}>
-        <Paper className={classes.paper} component="article">
+        <Box className={classes.paper} component="article">
           <Box className={classes.imageContainer}>
             <BackgroundImage
               Tag="div"
@@ -51,27 +43,15 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({
           </Box>
 
           <Box className={classes.content}>
-            <Box className={classes.action}>
-              <Typography variant="h4" component="h3" color="secondary">
-                {name}
-              </Typography>
+            <Typography variant="h6" component="h3" className={classes.title}>
+              {name}
+            </Typography>
 
-              <Typography variant="h5" component="p">
-                {price} грн.
-              </Typography>
-            </Box>
-
-            <Button
-              size="large"
-              variant="contained"
-              color="secondary"
-              className={classes.button}
-              onClick={handleAddToCart}
-            >
-              В кошик
-            </Button>
+            <Typography variant="h6" component="p" color="secondary" className={classes.priceText}>
+              {price} грн.
+            </Typography>
           </Box>
-        </Paper>
+        </Box>
       </LinkComponent>
     </Box>
   );
@@ -87,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
     height: 540,
     display: 'flex',
     flexDirection: 'column',
-    transition: 'box-shadow 600ms',
+    alignItems: 'center',
     '&:hover': {
-      boxShadow: '0px 14px 32px 0px rgba(0, 0, 0, 0.45)'
+      borderRightColor: theme.palette.primary.main
     },
     ['& .product-item-image']: {
       transition: 'transform 600ms'
@@ -99,13 +79,12 @@ const useStyles = makeStyles((theme) => ({
     },
 
     [theme.breakpoints.up('sm')]: {
-      height: 320,
-      flexDirection: 'row'
+      height: 320
     }
   },
   imageContainer: {
-    height: '70%',
-    width: '100%',
+    width: '70vw',
+    height: '70vw',
     overflow: 'hidden',
     [theme.breakpoints.up('sm')]: {
       height: '100%',
@@ -113,8 +92,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   image: {
-    height: '100%',
     width: '100%',
+    height: '100%',
     backgroundSize: 'cover'
   },
   content: {
@@ -123,18 +102,16 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
     [theme.breakpoints.up('sm')]: {
       height: '100%',
       width: '50%'
     }
   },
-  action: {
-    marginTop: 'auto'
+  title: {
+    color: theme.palette.common.black
   },
-  button: {
-    alignSelf: 'flex-end',
-    marginTop: 'auto'
+  priceText: {
+    textAlign: 'right'
   }
 }));
 
