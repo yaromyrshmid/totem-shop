@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import classnames from 'classnames';
 
