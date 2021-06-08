@@ -14,6 +14,9 @@ export const HeroSlidesRepo: IHeroSlidesRepo = {
         query HeroSlider {
           heroSliderCollection {
             items {
+              sys {
+                id
+              }
               title
               subtitle
               position

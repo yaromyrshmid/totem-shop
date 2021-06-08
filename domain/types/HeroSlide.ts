@@ -1,5 +1,7 @@
 export type HeroSlide = {
-  id: string;
+  sys: {
+    id: string;
+  };
   title: string;
   subtitle?: string;
   position: 'center' | 'top-right' | 'bottom-left' | 'bottom-right';

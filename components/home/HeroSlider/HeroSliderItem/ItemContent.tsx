@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import Link from 'next/link';
 
 import TextContent from './TextContent';
+import { useLinkSwipe } from 'utils/hooks/useLinkSwipe';
+import { useRouter } from 'next/router';
 
 interface ItemContentProps {
   title: string;
@@ -19,6 +21,13 @@ const ItemContent: React.FC<ItemContentProps> = ({
   textAlign
 }: ItemContentProps): JSX.Element => {
   const classes = useStyles();
+  const router = useRouter();
+
+  const handleLinkClick = () => {
+    router.push(link);
+  };
+
+  const { handleClick, handleMouseDown } = useLinkSwipe(handleLinkClick);
 
   if (link) {
     const isOutsideLink = link.substring(0, 4) === 'http';
@@ -36,7 +45,11 @@ const ItemContent: React.FC<ItemContentProps> = ({
           </a>
         ) : (
           <Link href={link}>
-            <MuiLink className={classes.linkedContent}>
+            <MuiLink
+              className={classes.linkedContent}
+              onClick={handleClick}
+              onMouseDown={handleMouseDown}
+            >
               <TextContent title={title} subtitle={subtitle} />
             </MuiLink>
           </Link>

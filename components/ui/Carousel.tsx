@@ -12,7 +12,7 @@ const Carousel: React.FC<CarouselProps> = ({
   settings,
   ...props
 }: CarouselProps): JSX.Element => (
-  <Slider arrows={false} {...settings} {...props}>
+  <Slider arrows={false} {...settings} {...props} draggable>
     {children}
   </Slider>
 );

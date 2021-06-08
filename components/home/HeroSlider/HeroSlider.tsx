@@ -22,7 +22,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ heroSlides }): JSX.Element => {
         }}
       >
         {heroSlides.map((item) => (
-          <HeroSliderItem item={item} key={item.id} />
+          <HeroSliderItem item={item} key={item.sys.id} />
         ))}
       </Carousel>
     </Box>

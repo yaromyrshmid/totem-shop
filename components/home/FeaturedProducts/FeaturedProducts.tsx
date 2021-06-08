@@ -1,43 +1,19 @@
 import React from 'react';
 import { Box, Container, makeStyles, Typography, useTheme } from '@material-ui/core';
-import { useStaticQuery, graphql } from 'gatsby';
 
-import Carousel from '../../ui/Carousel';
-import { ProductPreview as ProductPreviewType, IProductPreviewNode } from '../../../types/Product';
-import ProductPreview from '../../Shop/components/ProductPreview';
+import { ProductPreview } from 'domain/types';
+import Carousel from 'components/ui/Carousel';
+import FeaturedProductItem from './FeaturedProductItem';
 
-const getFeaturedProducts = graphql`
-  query {
-    products: allContentfulProduct(
-      filter: { featured: { eq: true }, available: { eq: true } }
-      sort: { fields: updatedAt, order: DESC }
-    ) {
-      edges {
-        node {
-          id
-          name
-          price
-          slug
-          mainImage {
-            fluid(maxWidth: 800) {
-              ...GatsbyContentfulFluid
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+interface FeaturedProductsProps {
+  products: Array<ProductPreview>;
+}
 
-const FeaturedProducts: React.FC = (): JSX.Element => {
+const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }): JSX.Element => {
   const classes = useStyles();
   const {
     breakpoints: { values: breakpoints }
   } = useTheme();
-
-  const products: Array<ProductPreviewType> = useStaticQuery(
-    getFeaturedProducts
-  ).products.edges.map(({ node }: IProductPreviewNode) => node);
 
   return (
     <Container>
@@ -76,10 +52,9 @@ const FeaturedProducts: React.FC = (): JSX.Element => {
         }}
       >
         {products.map((product) => (
-          <ProductPreview
+          <FeaturedProductItem
             product={product}
-            key={product.id}
-            useNativeLinking
+            key={product.sys.id}
             containerClassName={classes.featuredItemContainer}
           />
         ))}
