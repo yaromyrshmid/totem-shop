@@ -9,7 +9,7 @@ const LinkedLogo: React.FC = (): JSX.Element => {
   return (
     <Link href="/">
       <Box className={classes.logoContainer}>
-        <Image src="/logo.png" alt="Totem notes logo" width={54} height={54} />
+        <Image src="/logo.png" alt="Totem notes logo" width={54} height={54} quality={100} />
       </Box>
     </Link>
   );

@@ -11,7 +11,7 @@ interface LayoutProps {
   title?: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, title }: LayoutProps): JSX.Element => {
+const Layout: React.FC<LayoutProps> = ({ children, title }): JSX.Element => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 

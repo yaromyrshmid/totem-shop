@@ -9,7 +9,7 @@ export const useLinkSwipe = (onClick: () => void) => {
   };
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    if (typeof mouseDownTime === 'number' && Date.now() - mouseDownTime < 100) {
+    if (typeof mouseDownTime === 'number' && Date.now() - mouseDownTime < 300) {
       onClick();
     } else {
       e.preventDefault();

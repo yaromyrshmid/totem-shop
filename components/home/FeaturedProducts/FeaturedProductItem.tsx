@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, makeStyles, Typography } from '@material-ui/core';
+import { Box, makeStyles, Link as MuiLink, Typography } from '@material-ui/core';
 import classnames from 'classnames';
 
 import { ProductPreview } from 'domain/types';
@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useLinkSwipe } from 'utils/hooks/useLinkSwipe';
+import CustomA from 'components/ui/links/CustomA';
 
 interface ProductItemProps {
   product: ProductPreview;
@@ -32,28 +33,35 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const { handleMouseDown, handleClick } = useLinkSwipe(handleNavigateToProduct);
 
   return (
-    <Link href={`/shop/${slug}`}>
-      <Box
-        className={classnames(classes.cardContainer, containerClassName)}
-        onMouseDown={handleMouseDown}
-        onClick={handleClick}
-      >
-        <Box className={classes.paper} component="article">
-          <Box className={classes.imageContainer}>
-            <Image src={url} layout="fill" objectFit="cover" />
-          </Box>
+    <Link href={`/shop/${slug}`} passHref>
+      <CustomA>
+        <Box
+          className={classnames(classes.cardContainer, containerClassName)}
+          onMouseDown={handleMouseDown}
+          onClick={handleClick}
+        >
+          <Box className={classes.paper} component="article">
+            <Box className={classes.imageContainer}>
+              <Image src={url} layout="fill" objectFit="cover" quality={100} />
+            </Box>
 
-          <Box className={classes.content}>
-            <Typography variant="h6" component="h3" className={classes.title}>
-              {name}
-            </Typography>
+            <Box className={classes.content}>
+              <Typography variant="h6" component="h3" className={classes.title}>
+                {name}
+              </Typography>
 
-            <Typography variant="h6" component="p" color="secondary" className={classes.priceText}>
-              {price} грн.
-            </Typography>
+              <Typography
+                variant="h6"
+                component="p"
+                color="secondary"
+                className={classes.priceText}
+              >
+                {price} грн.
+              </Typography>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </CustomA>
     </Link>
   );
 };
