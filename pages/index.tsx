@@ -1,5 +1,10 @@
-import { ProductPreview, HeroSlide, Category } from 'domain/types';
-import { CategoriesRepo, FeaturedProductsRepo, HeroSlidesRepo } from 'domain/repositories';
+import { ProductPreview, HeroSlide, Category, PageMeta } from 'domain/types';
+import {
+  CategoriesRepo,
+  FeaturedProductsRepo,
+  HeroSlidesRepo,
+  PageMetaRepo
+} from 'domain/repositories';
 import HeroSlider from 'components/home/HeroSlider/HeroSlider';
 import Layout from 'components/layout/Layout';
 import FeaturedProducts from 'components/home/FeaturedProducts/FeaturedProducts';
@@ -9,11 +14,17 @@ interface HomeProps {
   heroSlides: Array<HeroSlide>;
   featuredProducts: Array<ProductPreview>;
   categories: Array<Category>;
+  pageMeta: PageMeta;
 }
 
-const Home: React.FC<HomeProps> = ({ heroSlides, featuredProducts, categories }): JSX.Element => {
+const Home: React.FC<HomeProps> = ({
+  heroSlides,
+  featuredProducts,
+  categories,
+  pageMeta
+}): JSX.Element => {
   return (
-    <Layout>
+    <Layout pageMeta={pageMeta}>
       <HeroSlider heroSlides={heroSlides} />
 
       <FeaturedProducts products={featuredProducts} />
@@ -23,20 +34,21 @@ const Home: React.FC<HomeProps> = ({ heroSlides, featuredProducts, categories })
   );
 };
 
+const PAGE_SLUG = 'index';
 export const getStaticProps = async () => {
-  const [heroSlides, featuredProducts, categories] = await Promise.all([
+  const [heroSlides, featuredProducts, categories, pageMeta] = await Promise.all([
     HeroSlidesRepo.get(),
     FeaturedProductsRepo.get(),
-    CategoriesRepo.get()
+    CategoriesRepo.get(),
+    PageMetaRepo.getBySlug(PAGE_SLUG)
   ]);
-
-  console.log(featuredProducts);
 
   return {
     props: {
       heroSlides,
       featuredProducts,
-      categories
+      categories,
+      pageMeta
     }
   };
 };

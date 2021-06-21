@@ -8,7 +8,7 @@ interface NavItemsProps {
   inDrawer?: boolean;
 }
 
-const navLinks = [
+export const navLinks = [
   {
     href: '/shop',
     title: 'Магазин'
@@ -28,7 +28,7 @@ const NavItems: React.FC<NavItemsProps> = ({ inDrawer }: NavItemsProps): JSX.Ele
   return (
     <Box className={classnames(classes.container, inDrawer && classes.containerInDrawer)}>
       {navLinks.map(({ href, title }) => (
-        <Link href={href} key={href}>
+        <Link href={href} key={href} passHref>
           <a
             className={classnames(
               classes.item,

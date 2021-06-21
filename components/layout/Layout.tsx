@@ -4,14 +4,15 @@ import { useMediaQuery, useTheme } from '@material-ui/core';
 
 import Header from './Header';
 import Drawer from './Drawer';
-import Footer from './Footer';
+import Footer from './Footer/Footer';
+import { PageMeta } from 'domain/types';
 
 interface LayoutProps {
   children: React.ReactNode;
-  title?: string;
+  pageMeta: PageMeta;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, title }): JSX.Element => {
+const Layout: React.FC<LayoutProps> = ({ children, pageMeta: { pageTitle } }): JSX.Element => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -35,7 +36,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }): JSX.Element => {
     <>
       <CssBaseline />
 
-      <Header openDrawer={handleOpenDrawer} pageTitle={title} />
+      <Header openDrawer={handleOpenDrawer} pageTitle={pageTitle} />
 
       {!isDesktop && <Drawer showDrawer={showDrawer} closeDrawer={handleCloseDrawer} />}
 

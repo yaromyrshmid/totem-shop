@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Container, GridList, GridListTile } from '@material-ui/core';
 
@@ -28,13 +28,11 @@ const CategoryTiles: React.FC<CategoryTilesProps> = ({ categories }): JSX.Elemen
   const breakpoint = useWidth();
   const [emtyTiles, setEmptyTiles] = useState<IEmptyTile[] | []>([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const rest =
       columnsForScreens[breakpoint] - (categories.length % columnsForScreens[breakpoint]);
 
     setEmptyTiles(Array.apply(null, Array(rest)).map((_, index) => ({ id: index })));
-
-    console.log(Array(rest));
   }, [breakpoint, categories]);
 
   return (

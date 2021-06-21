@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 import { apolloClient } from '../../apollo-client';
-import { Collection } from '../types/Collection';
+import { Collection } from './core/Collection';
 import { HeroSlide } from '../types/HeroSlide';
 import { IRepo } from './core/Repo';
 

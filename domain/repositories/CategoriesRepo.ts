@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 import { apolloClient } from '../../apollo-client';
 import { Category } from 'domain/types';
-import { Collection } from '../types/Collection';
+import { Collection } from './core/Collection';
 import { IRepo } from './core/Repo';
 
 interface ICategoriesRepo extends IRepo<Category> {}
