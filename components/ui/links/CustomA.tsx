@@ -8,15 +8,19 @@ interface CustomAProps {
   href?: string;
 }
 
-const CustomA: React.FC<CustomAProps> = ({ children, className, ...props }): JSX.Element => {
-  const classes = useStyles();
+type Ref = HTMLAnchorElement;
 
-  return (
-    <a className={classnames(classes.link, className)} {...props}>
-      {children}
-    </a>
-  );
-};
+const CustomA = React.forwardRef<Ref, CustomAProps>(
+  ({ children, className, ...props }, ref): JSX.Element => {
+    const classes = useStyles();
+
+    return (
+      <a className={classnames(classes.link, className)} {...props} ref={ref}>
+        {children}
+      </a>
+    );
+  }
+);
 
 const useStyles = makeStyles((theme) => ({
   link: {
