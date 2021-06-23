@@ -49,7 +49,8 @@ export const getStaticProps = async () => {
       featuredProducts,
       categories,
       pageMeta
-    }
+    },
+    revalidate: 180
   };
 };
 

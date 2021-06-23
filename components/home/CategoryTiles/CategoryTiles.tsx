@@ -50,8 +50,7 @@ const CategoryTiles: React.FC<CategoryTilesProps> = ({ categories }): JSX.Elemen
           <GridListTile key={category.sys.id}>
             <Link
               href={{
-                pathname: '/shop',
-                query: { categories: [category.slug] }
+                pathname: `/shop/${category.slug}`
               }}
               passHref
             >
