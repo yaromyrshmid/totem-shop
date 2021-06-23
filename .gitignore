@@ -1,4 +1,5 @@
 .env.development
+.npmrc
 sena-totem-firebase-adminsdk-jqsci-2e9a906307.json
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
