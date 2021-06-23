@@ -6,13 +6,14 @@ import Header from './Header';
 import Drawer from './Drawer';
 import Footer from './Footer/Footer';
 import { PageMeta } from 'domain/types';
+import { PageMetaContext } from 'utils/context/PageMetaContext';
 
 interface LayoutProps {
   children: React.ReactNode;
   pageMeta: PageMeta;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, pageMeta: { pageTitle } }): JSX.Element => {
+const Layout: React.FC<LayoutProps> = ({ children, pageMeta }): JSX.Element => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -33,16 +34,16 @@ const Layout: React.FC<LayoutProps> = ({ children, pageMeta: { pageTitle } }): J
   };
 
   return (
-    <>
+    <PageMetaContext.Provider value={pageMeta}>
       <CssBaseline />
 
-      <Header openDrawer={handleOpenDrawer} pageTitle={pageTitle} />
+      <Header openDrawer={handleOpenDrawer} />
 
       {!isDesktop && <Drawer showDrawer={showDrawer} closeDrawer={handleCloseDrawer} />}
 
       {children}
       <Footer />
-    </>
+    </PageMetaContext.Provider>
   );
 };
 

@@ -28,7 +28,10 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2)
+    [theme.breakpoints.up('sm')]: {
+      height: '100%',
+      alignItems: 'center'
+    }
   },
   item: {
     marginLeft: theme.spacing(1),
