@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Container, GridList, GridListTile } from '@material-ui/core';
+import { Container, GridList, GridListTile, Typography, Box } from '@material-ui/core';
 
 import { Category } from 'domain/types';
 import CategoryTileItem from './CategoryTileItem';
@@ -32,11 +32,19 @@ const CategoryTiles: React.FC<CategoryTilesProps> = ({ categories }): JSX.Elemen
     const rest =
       columnsForScreens[breakpoint] - (categories.length % columnsForScreens[breakpoint]);
 
-    setEmptyTiles(Array.apply(null, Array(rest)).map((_, index) => ({ id: index })));
+    const emptyTilesCount = columnsForScreens[breakpoint] === rest ? 0 : rest;
+
+    setEmptyTiles(Array.apply(null, Array(emptyTilesCount)).map((_, index) => ({ id: index })));
   }, [breakpoint, categories]);
 
   return (
     <Container>
+      <Box mb={4}>
+        <Typography variant="h4" component="h2">
+          Магазин:
+        </Typography>
+      </Box>
+
       <GridList cellHeight={160} cols={columnsForScreens[breakpoint]}>
         {categories.map((category) => (
           <GridListTile key={category.sys.id}>
