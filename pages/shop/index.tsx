@@ -16,11 +16,10 @@ const ShopPage: React.FC<ShopPageProps> = ({ categories, pageMeta }): JSX.Elemen
   );
 };
 
-const PAGE_SLUG = 'index';
 export const getStaticProps = async () => {
   const [categories, pageMeta] = await Promise.all([
     CategoriesRepo.get(),
-    PageMetaRepo.getBySlug(PAGE_SLUG)
+    PageMetaRepo.getDefault()
   ]);
 
   return {

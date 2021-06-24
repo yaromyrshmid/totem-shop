@@ -4,27 +4,10 @@ import { apolloClient } from '../../apollo-client';
 import { Collection } from './core/Collection';
 import { PageMeta } from 'domain/types/PageMeta';
 
+const DEFAULT_SLUG = 'index';
+
 export class PageMetaRepo {
-  static async get() {
-    const collection: Collection<PageMeta> = await apolloClient.query({
-      query: gql`
-        query Query {
-          metaDataCollection {
-            items {
-              pageName
-              sys {
-                id
-              }
-            }
-          }
-        }
-      `
-    });
-
-    return collection.data.metaDataCollection.items;
-  }
-
-  static async getBySlug(slug: string) {
+  private static async getBySlug(slug: string) {
     const collection: Collection<PageMeta> = await apolloClient.query({
       query: gql`
         query Query($metaDataCollectionWhere: MetaDataFilter) {
@@ -51,5 +34,9 @@ export class PageMetaRepo {
     });
 
     return collection.data.metaDataCollection.items[0];
+  }
+
+  static getDefault() {
+    return this.getBySlug(DEFAULT_SLUG);
   }
 }

@@ -34,13 +34,12 @@ const Home: React.FC<HomeProps> = ({
   );
 };
 
-const PAGE_SLUG = 'index';
 export const getStaticProps = async () => {
   const [heroSlides, featuredProducts, categories, pageMeta] = await Promise.all([
     HeroSlidesRepo.get(),
     ProductPreviewsRepo.getFeaturedProducts(),
     CategoriesRepo.get(),
-    PageMetaRepo.getBySlug(PAGE_SLUG)
+    PageMetaRepo.getDefault()
   ]);
 
   return {

@@ -16,11 +16,10 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ categories, pageMeta }): JS
   );
 };
 
-const PAGE_SLUG = 'index';
 export const getStaticProps = async () => {
   const [categories, pageMeta] = await Promise.all([
     CategoriesRepo.get(),
-    PageMetaRepo.getBySlug(PAGE_SLUG)
+    PageMetaRepo.getDefault()
   ]);
 
   return {
