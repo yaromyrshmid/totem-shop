@@ -2,15 +2,10 @@ import gql from 'graphql-tag';
 
 import { apolloClient } from '../../apollo-client';
 import { Collection } from './core/Collection';
-import { IRepo } from './core/Repo';
 import { PageMeta } from 'domain/types/PageMeta';
 
-interface IMetaRepo extends IRepo<PageMeta> {
-  getBySlug(slug: string): Promise<PageMeta>;
-}
-
-export const PageMetaRepo: IMetaRepo = {
-  async get() {
+export class PageMetaRepo {
+  static async get() {
     const collection: Collection<PageMeta> = await apolloClient.query({
       query: gql`
         query Query {
@@ -27,9 +22,9 @@ export const PageMetaRepo: IMetaRepo = {
     });
 
     return collection.data.metaDataCollection.items;
-  },
+  }
 
-  async getBySlug(slug: string) {
+  static async getBySlug(slug: string) {
     const collection: Collection<PageMeta> = await apolloClient.query({
       query: gql`
         query Query($metaDataCollectionWhere: MetaDataFilter) {
@@ -57,4 +52,4 @@ export const PageMetaRepo: IMetaRepo = {
 
     return collection.data.metaDataCollection.items[0];
   }
-};
+}

@@ -3,12 +3,9 @@ import gql from 'graphql-tag';
 import { apolloClient } from '../../apollo-client';
 import { Collection } from './core/Collection';
 import { ProductPreview } from '../types/ProductPreview';
-import { IRepo } from './core/Repo';
 
-interface IFeaturedProductsRepo extends IRepo<ProductPreview> {}
-
-export const FeaturedProductsRepo: IFeaturedProductsRepo = {
-  async get() {
+export class ProductPreviewsRepo {
+  static async getFeaturedProducts() {
     const collection: Collection<ProductPreview> = await apolloClient.query({
       query: gql`
         query FeaturedProducts(
@@ -41,4 +38,4 @@ export const FeaturedProductsRepo: IFeaturedProductsRepo = {
 
     return collection.data.productCollection.items;
   }
-};
+}

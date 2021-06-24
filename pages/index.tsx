@@ -1,7 +1,7 @@
 import { ProductPreview, HeroSlide, Category, PageMeta } from 'domain/types';
 import {
   CategoriesRepo,
-  FeaturedProductsRepo,
+  ProductPreviewsRepo,
   HeroSlidesRepo,
   PageMetaRepo
 } from 'domain/repositories';
@@ -38,7 +38,7 @@ const PAGE_SLUG = 'index';
 export const getStaticProps = async () => {
   const [heroSlides, featuredProducts, categories, pageMeta] = await Promise.all([
     HeroSlidesRepo.get(),
-    FeaturedProductsRepo.get(),
+    ProductPreviewsRepo.getFeaturedProducts(),
     CategoriesRepo.get(),
     PageMetaRepo.getBySlug(PAGE_SLUG)
   ]);

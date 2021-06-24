@@ -1,4 +1,4 @@
 export * from './HeroSlidesRepo';
-export * from './FeaturedProductsRepo';
+export * from './ProductPreviewsRepo';
 export * from './CategoriesRepo';
 export * from './PageMetaRepo';

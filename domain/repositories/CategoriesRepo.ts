@@ -3,12 +3,9 @@ import gql from 'graphql-tag';
 import { apolloClient } from '../../apollo-client';
 import { Category } from 'domain/types';
 import { Collection } from './core/Collection';
-import { IRepo } from './core/Repo';
 
-interface ICategoriesRepo extends IRepo<Category> {}
-
-export const CategoriesRepo: ICategoriesRepo = {
-  async get() {
+export class CategoriesRepo {
+  static async get() {
     const collection: Collection<Category> = await apolloClient.query({
       query: gql`
         query Query($categoriesCollectionOrder: [CategoriesOrder]) {
@@ -34,4 +31,4 @@ export const CategoriesRepo: ICategoriesRepo = {
 
     return collection.data.categoriesCollection.items;
   }
-};
+}
