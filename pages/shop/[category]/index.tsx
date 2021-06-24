@@ -1,17 +1,25 @@
-import { Category, PageMeta } from 'domain/types';
+import { Category, PageMeta, ProductPreview } from 'domain/types';
 import { CategoriesRepo, PageMetaRepo, ProductPreviewsRepo } from 'domain/repositories';
 import Layout from 'components/layout/Layout';
 import CategoryTiles from 'components/home/CategoryTiles/CategoryTiles';
+import CategoryNavigation from 'components/shop/CategoryNavigation/CategoryNavigation';
 
 interface CategoryPageProps {
   categories: Array<Category>;
   pageMeta: PageMeta;
+  products: Array<ProductPreview>;
+  categorySlug: string;
 }
 
-const CategoryPage: React.FC<CategoryPageProps> = ({ categories, pageMeta }): JSX.Element => {
+const CategoryPage: React.FC<CategoryPageProps> = ({
+  categories,
+  pageMeta,
+  products,
+  categorySlug
+}): JSX.Element => {
   return (
     <Layout pageMeta={pageMeta}>
-      <CategoryTiles categories={categories} />
+      <CategoryNavigation categories={categories} categorySlug={categorySlug} />
     </Layout>
   );
 };
@@ -45,7 +53,9 @@ export const getStaticProps = async (ctx: CategoryPageContext) => {
   return {
     props: {
       categories,
-      pageMeta
+      pageMeta,
+      products,
+      categorySlug
     },
     revalidate: 120
   };
