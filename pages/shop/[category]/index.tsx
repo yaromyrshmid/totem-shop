@@ -1,5 +1,5 @@
 import { Category, PageMeta } from 'domain/types';
-import { CategoriesRepo, PageMetaRepo } from 'domain/repositories';
+import { CategoriesRepo, PageMetaRepo, ProductPreviewsRepo } from 'domain/repositories';
 import Layout from 'components/layout/Layout';
 import CategoryTiles from 'components/home/CategoryTiles/CategoryTiles';
 
@@ -16,10 +16,30 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ categories, pageMeta }): JS
   );
 };
 
-export const getStaticProps = async () => {
-  const [categories, pageMeta] = await Promise.all([
+export async function getStaticPaths() {
+  const slugs = await CategoriesRepo.getSlugs();
+
+  const paths = slugs.map(({ slug }) => ({ params: { category: slug } }));
+
+  return {
+    paths,
+    fallback: true
+  };
+}
+
+interface CategoryPageContext {
+  params: { category: string };
+}
+
+export const getStaticProps = async (ctx: CategoryPageContext) => {
+  const {
+    params: { category: categorySlug }
+  } = ctx;
+
+  const [categories, pageMeta, products] = await Promise.all([
     CategoriesRepo.get(),
-    PageMetaRepo.getDefault()
+    PageMetaRepo.getDefault(),
+    ProductPreviewsRepo.getProductsByCategorySlug(categorySlug)
   ]);
 
   return {

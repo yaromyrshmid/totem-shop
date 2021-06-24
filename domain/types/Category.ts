@@ -9,3 +9,7 @@ export type Category = {
     title: string;
   };
 };
+
+export type CategorySlugOnly = {
+  slug: string;
+};

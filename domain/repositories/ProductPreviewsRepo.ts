@@ -38,4 +38,36 @@ export class ProductPreviewsRepo {
 
     return collection.data.productCollection.items;
   }
+
+  static async getProductsByCategorySlug(slug: string) {
+    const collection: Collection<ProductPreview> = await apolloClient.query({
+      query: gql`
+        query Query($productCollectionWhere: ProductFilter) {
+          productCollection(where: $productCollectionWhere) {
+            items {
+              sys {
+                id
+              }
+              name
+              slug
+              price
+              mainImage {
+                url
+              }
+            }
+          }
+        }
+      `,
+      variables: {
+        productCollectionWhere: {
+          category: {
+            slug
+          }
+        },
+        productCollectionOrder: 'sys_publishedAt_DESC'
+      }
+    });
+
+    return collection.data.productCollection.items;
+  }
 }

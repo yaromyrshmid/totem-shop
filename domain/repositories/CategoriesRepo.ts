@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 import { apolloClient } from '../../apollo-client';
-import { Category } from 'domain/types';
+import { Category, CategorySlugOnly } from 'domain/types';
 import { Collection } from './core/Collection';
 
 export class CategoriesRepo {
@@ -27,6 +27,22 @@ export class CategoriesRepo {
       variables: {
         categoriesCollectionOrder: 'name_DESC'
       }
+    });
+
+    return collection.data.categoriesCollection.items;
+  }
+
+  static async getSlugs() {
+    const collection: Collection<CategorySlugOnly> = await apolloClient.query({
+      query: gql`
+        query Query {
+          categoriesCollection {
+            items {
+              slug
+            }
+          }
+        }
+      `
     });
 
     return collection.data.categoriesCollection.items;
