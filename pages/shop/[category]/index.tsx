@@ -35,7 +35,6 @@ export const getStaticPaths = async () => {
   const slugs = await CategoriesRepo.getSlugs();
 
   const paths = slugs.map(({ slug }) => ({ params: { category: slug } }));
-  console.log(paths);
 
   return {
     paths,
