@@ -49,7 +49,7 @@ export const getStaticProps = async () => {
       categories,
       pageMeta
     },
-    revalidate: 180
+    revalidate: 30
   };
 };
 

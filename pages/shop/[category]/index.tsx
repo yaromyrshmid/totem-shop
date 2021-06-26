@@ -64,7 +64,7 @@ export const getStaticProps = async (ctx: CategoryPageContext) => {
       products,
       categorySlug
     },
-    revalidate: 120
+    revalidate: 30
   };
 };
 
