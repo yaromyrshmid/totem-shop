@@ -15,7 +15,7 @@ const CategoryNavigation: React.FC<CategoryNavigationProps> = ({
 }): JSX.Element => {
   const classes = useStyles();
 
-  const selectedCategory = categories?.find(({ slug }) => slug === categorySlug);
+  const selectedCategory = categories.find(({ slug }) => slug === categorySlug);
 
   return (
     <Container>

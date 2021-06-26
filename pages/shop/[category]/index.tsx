@@ -1,7 +1,8 @@
+import { useRouter } from 'next/router';
+
 import { Category, PageMeta, ProductPreview } from 'domain/types';
 import { CategoriesRepo, PageMetaRepo, ProductPreviewsRepo } from 'domain/repositories';
 import Layout from 'components/layout/Layout';
-import CategoryTiles from 'components/home/CategoryTiles/CategoryTiles';
 import CategoryNavigation from 'components/shop/CategoryNavigation/CategoryNavigation';
 
 interface CategoryPageProps {
@@ -17,6 +18,12 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
   products,
   categorySlug
 }): JSX.Element => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Layout pageMeta={pageMeta}>
       <CategoryNavigation categories={categories} categorySlug={categorySlug} />
@@ -24,16 +31,17 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const slugs = await CategoriesRepo.getSlugs();
 
   const paths = slugs.map(({ slug }) => ({ params: { category: slug } }));
+  console.log(paths);
 
   return {
     paths,
     fallback: true
   };
-}
+};
 
 interface CategoryPageContext {
   params: { category: string };
