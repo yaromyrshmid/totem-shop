@@ -6,7 +6,7 @@ import { PageMeta } from 'domain/types/PageMeta';
 
 const DEFAULT_SLUG = 'index';
 
-export class PageMetaRepo {
+export abstract class PageMetaRepo {
   private static async getBySlug(slug: string) {
     const collection: Collection<PageMeta> = await apolloClient.query({
       query: gql`

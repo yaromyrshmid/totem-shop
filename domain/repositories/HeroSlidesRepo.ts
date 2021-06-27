@@ -4,7 +4,7 @@ import { apolloClient } from '../../apollo-client';
 import { Collection } from './core/Collection';
 import { HeroSlide } from '../types/HeroSlide';
 
-export class HeroSlidesRepo {
+export abstract class HeroSlidesRepo {
   static async get() {
     const collection: Collection<HeroSlide> = await apolloClient.query({
       query: gql`

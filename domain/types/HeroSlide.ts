@@ -1,7 +1,7 @@
+import { SysId } from './core/SysId';
+
 export type HeroSlide = {
-  sys: {
-    id: string;
-  };
+  sys: SysId;
   title: string;
   subtitle?: string;
   position: 'center' | 'top-right' | 'bottom-left' | 'bottom-right';

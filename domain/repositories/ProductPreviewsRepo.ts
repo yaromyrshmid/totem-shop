@@ -4,7 +4,7 @@ import { apolloClient } from '../../apollo-client';
 import { Collection } from './core/Collection';
 import { ProductPreview } from '../types/ProductPreview';
 
-export class ProductPreviewsRepo {
+export abstract class ProductPreviewsRepo {
   static async getFeaturedProducts() {
     const collection: Collection<ProductPreview> = await apolloClient.query({
       query: gql`

@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import { Category, PageMeta, ProductPreview } from 'domain/types';
 import { CategoriesRepo, PageMetaRepo, ProductPreviewsRepo } from 'domain/repositories';
@@ -27,6 +28,12 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
   return (
     <Layout pageMeta={pageMeta}>
       <CategoryNavigation categories={categories} categorySlug={categorySlug} />
+
+      {products.map((product) => (
+        <Link href={`/shop/${categorySlug}/${product.slug}`} key={product.slug}>
+          {product.name}
+        </Link>
+      ))}
     </Layout>
   );
 };

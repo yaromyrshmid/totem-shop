@@ -1,7 +1,7 @@
+import { SysId } from './core/SysId';
+
 export type ProductPreview = {
-  sys: {
-    id: string;
-  };
+  sys: SysId;
   slug: string;
   mainImage: {
     url: string;

@@ -4,7 +4,7 @@ import { apolloClient } from '../../apollo-client';
 import { Category, CategorySlugOnly } from 'domain/types';
 import { Collection } from './core/Collection';
 
-export class CategoriesRepo {
+export abstract class CategoriesRepo {
   static async get() {
     const collection: Collection<Category> = await apolloClient.query({
       query: gql`

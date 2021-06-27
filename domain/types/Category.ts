@@ -1,7 +1,7 @@
+import { SysId } from './core/SysId';
+
 export type Category = {
-  sys: {
-    id: string;
-  };
+  sys: SysId;
   name: string;
   slug: string;
   image: {
