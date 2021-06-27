@@ -9,7 +9,7 @@ const LinkedLogo: React.FC = (): JSX.Element => {
   return (
     <Link href="/">
       <Box className={classes.logoContainer}>
-        <Image src="/logo.png" alt="Totem notes logo" width={54} height={54} quality={100} />
+        <img src="/logo.svg" alt="Totem logo" className={classes.logo} />
       </Box>
     </Link>
   );
@@ -17,14 +17,10 @@ const LinkedLogo: React.FC = (): JSX.Element => {
 
 const useStyles = makeStyles((theme) => ({
   logoContainer: {
-    height: 70,
-    width: 70,
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    marginRight: theme.spacing(2.5)
+    paddingTop: theme.spacing(1)
   },
   logo: {
-    height: '100%'
+    height: 54
   }
 }));
 

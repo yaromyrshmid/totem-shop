@@ -18,6 +18,7 @@ const Copyright: React.FC = (): JSX.Element => {
 const useStyles = makeStyles(() => ({
   copyrightContainer: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%'
