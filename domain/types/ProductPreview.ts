@@ -10,7 +10,7 @@ export type ProductPreview = {
   price: number;
 };
 
-type ColorPreview = {
+export type ColorPreview = {
   sys: SysId;
   color: string;
   slug: string;

@@ -18,19 +18,22 @@ interface ProductTileItemProps {
   product: ProductPreviewWithColorCollection;
 }
 
-const ProductTileItem: React.FC<ProductTileItemProps> = ({ product }): JSX.Element => {
-  if (product.colorsCollection.items.length) {
+const ProductTileItem: React.FC<ProductTileItemProps> = ({
+  product: { colorsCollection, ...product }
+}): JSX.Element => {
+  if (colorsCollection.items.length) {
     return (
       <>
-        {product.colorsCollection.items.map((coloredProduct) => (
+        {colorsCollection.items.map((coloredProduct) => (
           <GridItem key={coloredProduct.sys.id}>
             <ProductCard
               product={{
                 ...product,
-                slug: `${product.slug}?${coloredProduct.slug}`,
                 mainImage: coloredProduct.mainImage,
                 name: `${product.name} - ${coloredProduct.color}`
               }}
+              colors={colorsCollection.items}
+              colorSlug={coloredProduct.slug}
             />
           </GridItem>
         ))}

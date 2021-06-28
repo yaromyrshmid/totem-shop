@@ -11,7 +11,7 @@ interface ProductTilesProps {
 const ProductTiles: React.FC<ProductTilesProps> = ({ products }): JSX.Element => {
   return (
     <Container>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} alignItems="stretch">
         {products.map((product) => (
           <ProductTileItem product={product} key={product.sys.id} />
         ))}

@@ -4,10 +4,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import CustomA from 'components/ui/links/CustomA';
-import { ProductPreview } from 'domain/types';
+import { ColorPreview, ProductPreview } from 'domain/types';
+import ColorPanel from './ColorPanel';
 
 interface ProductCardProps {
   product: ProductPreview;
+  colors?: Array<ColorPreview>;
+  colorSlug?: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -16,19 +19,23 @@ const ProductCard: React.FC<ProductCardProps> = ({
     mainImage: { url },
     price,
     name
-  }
+  },
+  colors,
+  colorSlug
 }): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <Link href={slug} passHref>
+    <Link href={colorSlug ? `${slug}?color=${colorSlug}` : slug} passHref>
       <CustomA>
-        <Card>
+        <Card className={classes.card}>
           <Box className={classes.imageContainer}>
             <Image src={url} layout="fill" objectFit="cover" quality={100} />
           </Box>
 
           <Box className={classes.content}>
+            <ColorPanel colors={colors} colorSlug={colorSlug} productSlug={slug} />
+
             <Typography variant="h6" component="h3">
               {name}
             </Typography>
@@ -44,6 +51,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
 };
 
 const useStyles = makeStyles((theme) => ({
+  card: {
+    height: '100%'
+  },
   imageContainer: {
     height: 200,
     width: '100%',
