@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 import CustomA from 'components/ui/links/CustomA';
 
@@ -16,7 +16,7 @@ const LinkedLogo: React.FC = (): JSX.Element => {
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   logo: {
     height: 54
   }

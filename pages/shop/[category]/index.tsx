@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
-import { Category, PageMeta, ProductPreview } from 'domain/types';
+import { Category, PageMeta, ProductPreviewWithColorCollection } from 'domain/types';
 import { CategoriesRepo, PageMetaRepo, ProductPreviewsRepo } from 'domain/repositories';
 import Layout from 'components/layout/Layout';
 import CategoryNavigation from 'components/shop/CategoryNavigation/CategoryNavigation';
+import ProductTiles from 'components/shop/ProductTiles/ProductTiles';
 
 interface CategoryPageProps {
   categories: Array<Category>;
   pageMeta: PageMeta;
-  products: Array<ProductPreview>;
+  products: Array<ProductPreviewWithColorCollection>;
   categorySlug: string;
 }
 
@@ -29,11 +29,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
     <Layout pageMeta={pageMeta}>
       <CategoryNavigation categories={categories} categorySlug={categorySlug} />
 
-      {products.map((product) => (
-        <Link href={`/shop/${categorySlug}/${product.slug}`} key={product.slug}>
-          {product.name}
-        </Link>
-      ))}
+      <ProductTiles products={products} />
     </Layout>
   );
 };

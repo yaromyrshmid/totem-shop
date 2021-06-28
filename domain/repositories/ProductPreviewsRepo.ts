@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 import { apolloClient } from '../../apollo-client';
 import { Collection } from './core/Collection';
-import { ProductPreview } from '../types/ProductPreview';
+import { ProductPreview, ProductPreviewWithColorCollection } from '../types/ProductPreview';
 
 export abstract class ProductPreviewsRepo {
   static async getFeaturedProducts() {
@@ -40,10 +40,10 @@ export abstract class ProductPreviewsRepo {
   }
 
   static async getProductsByCategorySlug(slug: string) {
-    const collection: Collection<ProductPreview> = await apolloClient.query({
+    const collection: Collection<ProductPreviewWithColorCollection> = await apolloClient.query({
       query: gql`
         query Query($productCollectionWhere: ProductFilter) {
-          productCollection(where: $productCollectionWhere) {
+          productCollection(limit: 50, where: $productCollectionWhere) {
             items {
               sys {
                 id
@@ -53,6 +53,19 @@ export abstract class ProductPreviewsRepo {
               price
               mainImage {
                 url
+              }
+              colorsCollection {
+                items {
+                  sys {
+                    id
+                  }
+                  color
+                  slug
+                  hexColor
+                  mainImage {
+                    url
+                  }
+                }
               }
             }
           }

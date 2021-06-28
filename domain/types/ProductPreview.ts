@@ -9,3 +9,19 @@ export type ProductPreview = {
   name: string;
   price: number;
 };
+
+type ColorPreview = {
+  sys: SysId;
+  color: string;
+  slug: string;
+  hexColor: string;
+  mainImage: {
+    url: string;
+  };
+};
+
+export type ProductPreviewWithColorCollection = ProductPreview & {
+  colorsCollection: {
+    items: Array<ColorPreview>;
+  };
+};

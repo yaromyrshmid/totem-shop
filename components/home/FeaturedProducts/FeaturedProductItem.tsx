@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, makeStyles, Link as MuiLink, Typography } from '@material-ui/core';
+import { Box, makeStyles, Typography } from '@material-ui/core';
 import classnames from 'classnames';
-
-import { ProductPreview } from 'domain/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+
+import { ProductPreview } from 'domain/types';
 import { useLinkSwipe } from 'utils/hooks/useLinkSwipe';
 import CustomA from 'components/ui/links/CustomA';
 
