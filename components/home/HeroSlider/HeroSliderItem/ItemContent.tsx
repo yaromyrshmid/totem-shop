@@ -44,7 +44,7 @@ const ItemContent: React.FC<ItemContentProps> = ({
             <TextContent title={title} subtitle={subtitle} />
           </a>
         ) : (
-          <Link href={link}>
+          <Link href={link} passHref>
             <MuiLink
               className={classes.linkedContent}
               onClick={handleClick}

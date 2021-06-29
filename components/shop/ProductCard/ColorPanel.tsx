@@ -19,7 +19,7 @@ const ColorPanel: React.FC<ColorPanelProps> = ({ colors, productSlug, colorSlug 
   return (
     <Box className={classes.container}>
       {colors.map((color) => (
-        <Link href={`${productSlug}?color=${color.slug}`} passHref>
+        <Link href={`${productSlug}?color=${color.slug}`} passHref key={color.sys.id}>
           <CustomA>
             <Box className={classes.item} style={{ backgroundColor: color.hexColor }}>
               {colorSlug === color.slug && <Box className={classes.activeBorder} />}

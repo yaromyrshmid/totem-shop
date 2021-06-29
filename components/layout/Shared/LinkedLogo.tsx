@@ -1,25 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
-import { makeStyles } from '@material-ui/core';
+import Image from 'next/image';
 
+import logo from 'public/logo.svg';
 import CustomA from 'components/ui/links/CustomA';
 
 const LinkedLogo: React.FC = (): JSX.Element => {
-  const classes = useStyles();
-
   return (
     <Link href="/" passHref>
       <CustomA>
-        <img src="/logo.svg" alt="Totem logo" className={classes.logo} />
+        <Image src={logo} alt="Totem logo" height={54} width={147} />
       </CustomA>
     </Link>
   );
 };
-
-const useStyles = makeStyles(() => ({
-  logo: {
-    height: 54
-  }
-}));
 
 export default LinkedLogo;

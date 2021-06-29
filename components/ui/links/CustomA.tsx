@@ -33,4 +33,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+CustomA.displayName = 'CustomA';
+
 export default CustomA;

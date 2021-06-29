@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const clientOnly: React.FC<React.FC> = (Component: React.FC): JSX.Element => {
+const ClientOnly: React.FC<React.FC> = (Component: React.FC): JSX.Element => {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
@@ -14,4 +14,4 @@ const clientOnly: React.FC<React.FC> = (Component: React.FC): JSX.Element => {
   return <Component />;
 };
 
-export default clientOnly;
+export default ClientOnly;
