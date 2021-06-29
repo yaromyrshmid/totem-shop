@@ -18,7 +18,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
     slug,
     mainImage: { url },
     price,
-    name
+    name,
+    category: { slug: categorySlug }
   },
   colors,
   colorSlug
@@ -26,7 +27,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const classes = useStyles();
 
   return (
-    <Link href={colorSlug ? `${slug}?color=${colorSlug}` : slug} passHref>
+    <Link
+      href={{
+        pathname: `/shop/${categorySlug}/${slug}`,
+        query: { color: colorSlug }
+      }}
+      passHref
+    >
       <CustomA>
         <Card className={classes.card}>
           <Box className={classes.imageContainer}>

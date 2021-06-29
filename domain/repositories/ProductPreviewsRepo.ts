@@ -23,6 +23,9 @@ export abstract class ProductPreviewsRepo {
               mainImage {
                 url
               }
+              category {
+                slug
+              }
             }
           }
         }
@@ -53,6 +56,9 @@ export abstract class ProductPreviewsRepo {
               price
               mainImage {
                 url
+              }
+              category {
+                slug
               }
               colorsCollection {
                 items {

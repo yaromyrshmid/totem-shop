@@ -45,10 +45,16 @@ export const getStaticProps = async (ctx: ProductPageContext) => {
     params: { product: productSlug }
   } = ctx;
 
-  const [pageMeta, product] = await Promise.all([
+  const [pageMeta, productId] = await Promise.all([
     PageMetaRepo.getDefault(),
-    ProductsRepo.getBySlug(productSlug)
+    ProductsRepo.getIdBySlug(productSlug)
   ]);
+
+  if (!productId) {
+    return { notFound: true };
+  }
+
+  const product = await ProductsRepo.getById(productId);
 
   return {
     props: {

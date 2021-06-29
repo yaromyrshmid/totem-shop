@@ -8,6 +8,9 @@ export type ProductPreview = {
   };
   name: string;
   price: number;
+  category: {
+    slug: string;
+  };
 };
 
 export type ColorPreview = {

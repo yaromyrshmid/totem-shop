@@ -13,7 +13,6 @@ interface ColorPanelProps {
 
 const ColorPanel: React.FC<ColorPanelProps> = ({ colors, productSlug, colorSlug }): JSX.Element => {
   const classes = useStyles();
-  console.log(!colors || !colors.length || !colorSlug);
 
   if (!colors || !colors.length || !colorSlug) return <></>;
 

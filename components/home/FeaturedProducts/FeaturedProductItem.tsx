@@ -19,7 +19,8 @@ const ProductItem: React.FC<ProductItemProps> = ({
     slug,
     mainImage: { url },
     name,
-    price
+    price,
+    category: { slug: categorySlug }
   },
   containerClassName
 }: ProductItemProps): JSX.Element => {
@@ -33,7 +34,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const { handleMouseDown, handleClick } = useLinkSwipe(handleNavigateToProduct);
 
   return (
-    <Link href={`/shop/${slug}`} passHref>
+    <Link href={`/shop/${categorySlug}/${slug}`} passHref>
       <CustomA>
         <Box
           className={classnames(classes.cardContainer, containerClassName)}
