@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { PageMeta, Product } from 'domain/types';
 import { PageMetaRepo, ProductsRepo } from 'domain/repositories';
 import Layout from 'components/layout/Layout';
+import ProductComponent from 'components/product/Product';
 
 interface ProductPageProps {
   pageMeta: PageMeta;
@@ -18,7 +19,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ pageMeta, product }): JSX.Ele
 
   return (
     <Layout pageMeta={pageMeta}>
-      <p>{JSON.stringify(product, null, 2)}</p>
+      <ProductComponent product={product} />
     </Layout>
   );
 };
