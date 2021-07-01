@@ -37,5 +37,5 @@ export type Product = {
   youMayAlsoLikeCollection: {
     items: Array<ProductPreview>;
   };
-  colorsCollection: Array<ColoredProduct>;
+  colorsCollection: { items: Array<ColoredProduct> };
 };

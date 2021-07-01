@@ -8,6 +8,7 @@ export const useWidth = (): screen => {
 
   return (
     keys.reduce((output, key) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const matches = useMediaQuery(theme.breakpoints.up(key));
 
       return output === 'xs' && matches ? key : output;
