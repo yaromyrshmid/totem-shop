@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 
 import { Product } from 'domain/types';
 import ProductBreadcrumbs from './ProductBreadcrumbs';
@@ -32,13 +32,17 @@ const ProductComponent: React.FC<ProductProps> = ({
 
       <ProductTitle name={name} colorName={activeColor?.color} />
 
-      <ProductGallery
-        images={
-          activeColor
-            ? [activeColor.mainImage, ...activeColor.imagesCollection.items]
-            : [mainImage, ...images]
-        }
-      />
+      <Grid container>
+        <Grid item xs={12}>
+          <ProductGallery
+            images={
+              activeColor
+                ? [activeColor.mainImage, ...activeColor.imagesCollection.items]
+                : [mainImage, ...images]
+            }
+          />
+        </Grid>
+      </Grid>
     </Container>
   );
 };
