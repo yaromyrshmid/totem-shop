@@ -64,6 +64,11 @@ export abstract class ProductsRepo {
             mainImage {
               url
             }
+            imagesCollection {
+              items {
+                url
+              }
+            }
             category {
               name
               slug

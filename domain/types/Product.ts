@@ -1,4 +1,4 @@
-import { SysId } from './core/SysId';
+import { Image, SysId } from './core';
 import { ProductPreview } from './ProductPreview';
 
 export type ProductSlugOnly = {
@@ -15,7 +15,8 @@ export type ProductIdOnly = {
 export type ColoredProduct = {
   color: string;
   slug: string;
-  imagesCollection: Array<{ url: string }>;
+  mainImage: Image;
+  imagesCollection: { items: Array<Image> };
   available: boolean;
   sys: SysId;
 };
@@ -27,9 +28,8 @@ export type Product = {
   description: {
     json: JSON;
   };
-  mainImage: {
-    url: string;
-  };
+  mainImage: Image;
+  imagesCollection: { items: Array<Image> };
   category: {
     name: string;
     slug: string;

@@ -5,6 +5,7 @@ import { Product } from 'domain/types';
 import ProductBreadcrumbs from './ProductBreadcrumbs';
 import { useProductColor } from 'utils/hooks/useProductColor';
 import ProductTitle from './ProductTitle';
+import ProductGallery from './ProductGallery';
 
 interface ProductProps {
   product: Product;
@@ -15,7 +16,8 @@ const ProductComponent: React.FC<ProductProps> = ({
     category: { name: categoryName, slug: categorySlug },
     name,
     colorsCollection: { items: productColors },
-    ...product
+    mainImage,
+    imagesCollection: { items: images }
   }
 }): JSX.Element => {
   const { activeColor } = useProductColor(productColors);
@@ -27,7 +29,16 @@ const ProductComponent: React.FC<ProductProps> = ({
         categorySlug={categorySlug}
         productName={name}
       />
+
       <ProductTitle name={name} colorName={activeColor?.color} />
+
+      <ProductGallery
+        images={
+          activeColor
+            ? [activeColor.mainImage, ...activeColor.imagesCollection.items]
+            : [mainImage, ...images]
+        }
+      />
     </Container>
   );
 };

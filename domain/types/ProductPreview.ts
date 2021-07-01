@@ -1,11 +1,9 @@
-import { SysId } from './core/SysId';
+import { Image, SysId } from './core';
 
 export type ProductPreview = {
   sys: SysId;
   slug: string;
-  mainImage: {
-    url: string;
-  };
+  mainImage: Image;
   name: string;
   price: number;
   category: {
@@ -18,9 +16,7 @@ export type ColorPreview = {
   color: string;
   slug: string;
   hexColor: string;
-  mainImage: {
-    url: string;
-  };
+  mainImage: Image;
 };
 
 export type ProductPreviewWithColorCollection = ProductPreview & {
