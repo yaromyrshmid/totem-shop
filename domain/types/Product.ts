@@ -27,6 +27,7 @@ export type Product = {
   name: string;
   price: number;
   slug: string;
+  available: boolean;
   description: {
     json: JSON;
   };

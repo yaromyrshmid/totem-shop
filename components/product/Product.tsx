@@ -7,6 +7,7 @@ import { useProductColor } from 'utils/hooks/useProductColor';
 import ProductTitle from './ProductTitle';
 import ProductGallery from './ProductGallery';
 import ColorPanel from 'components/product/ColorPanel';
+import BuyBlock from './BuyBlock/BuyBlock';
 
 interface ProductProps {
   product: Product;
@@ -19,11 +20,15 @@ const ProductComponent: React.FC<ProductProps> = ({
     slug,
     colorsCollection: { items: productColors },
     mainImage,
-    imagesCollection: { items: images }
+    imagesCollection: { items: images },
+    available,
+    price
   }
 }): JSX.Element => {
-  const { activeColor } = useProductColor(productColors);
   const classes = useStyles();
+  const { activeColor } = useProductColor(productColors);
+
+  const handleBuy = () => {};
 
   return (
     <Container>
@@ -56,6 +61,14 @@ const ProductComponent: React.FC<ProductProps> = ({
               useShallowRouting
             />
           </Box>
+        </Grid>
+
+        <Grid item xs={12}>
+          <BuyBlock
+            available={activeColor ? activeColor.available : available}
+            price={price}
+            onBuy={handleBuy}
+          />
         </Grid>
       </Grid>
     </Container>
