@@ -1,4 +1,4 @@
-import { Image, SysId } from './core';
+import { Image, RichText, SysId } from './core';
 import { ProductPreview } from './ProductPreview';
 
 export type ProductSlugOnly = {
@@ -28,9 +28,7 @@ export type Product = {
   price: number;
   slug: string;
   available: boolean;
-  description: {
-    json: JSON;
-  };
+  description: RichText;
   mainImage: Image;
   imagesCollection: { items: Array<Image> };
   category: {
