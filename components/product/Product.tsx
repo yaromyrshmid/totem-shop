@@ -82,7 +82,7 @@ const ProductComponent: React.FC<ProductProps> = ({
         {!!otherProducts.length && (
           <Grid item xs={12}>
             <Typography variant="h5" component="h3">
-              Вас може зацікавити:
+              Також вас може зацікавити:
             </Typography>
 
             <FeaturedProducts products={otherProducts} />

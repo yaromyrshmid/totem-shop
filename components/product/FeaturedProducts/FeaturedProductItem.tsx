@@ -42,9 +42,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
           onClick={handleClick}
         >
           <Box className={classes.paper} component="article">
-            <Box className={classes.imageContainer}>
-              <Image src={url} layout="fill" objectFit="cover" quality={100} />
-            </Box>
+            <Image
+              src={url}
+              height={250}
+              width={250}
+              quality={100}
+              className="product-item-image"
+            />
 
             <Box className={classes.content}>
               <Typography variant="h6" component="h3" className={classes.title}>
@@ -74,38 +78,15 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     overflow: 'hidden',
-    height: 540,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    '&:hover': {
-      borderRightColor: theme.palette.primary.main
-    },
     ['& .product-item-image']: {
       transition: 'transform 600ms'
     },
     '&:hover .product-item-image': {
       transform: 'scale(1.1)'
-    },
-
-    [theme.breakpoints.up('sm')]: {
-      height: 320
     }
-  },
-  imageContainer: {
-    width: '70vw',
-    height: '70vw',
-    overflow: 'hidden',
-    position: 'relative',
-    [theme.breakpoints.up('sm')]: {
-      height: '100%',
-      width: '50%'
-    }
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    backgroundSize: 'cover'
   },
   content: {
     height: '30%',
@@ -115,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     [theme.breakpoints.up('sm')]: {
       height: '100%',
-      width: '50%'
+      width: '75%'
     }
   },
   title: {

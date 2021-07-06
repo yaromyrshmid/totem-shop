@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   featuredItemContainer: {
     padding: theme.spacing(3),
-    paddingBottom: theme.spacing(6)
+    paddingBottom: theme.spacing(1)
   }
 }));
 
