@@ -10,6 +10,7 @@ import {
 import HeroSlider from 'components/home/HeroSlider/HeroSlider';
 import Layout from 'components/layout/Layout';
 import FeaturedProducts from 'components/product/FeaturedProducts/FeaturedProducts';
+import FeaturedProductsTitle from 'components/home/FeaturedProductsTitle';
 import CategoryTiles from 'components/shop/CategoryTiles/CategoryTiles';
 
 interface HomeProps {
@@ -30,7 +31,8 @@ const Home: React.FC<HomeProps> = ({
       <HeroSlider heroSlides={heroSlides} />
 
       <Container>
-        <FeaturedProducts products={featuredProducts} title="Новинки:" />
+        <FeaturedProductsTitle />
+        <FeaturedProducts products={featuredProducts} />
       </Container>
 
       <CategoryTiles categories={categories} />

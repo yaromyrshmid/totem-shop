@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Box, makeStyles } from '@material-ui/core';
+import { Container, Grid, Box, makeStyles, Typography } from '@material-ui/core';
 
 import { Product } from 'domain/types';
 import ProductBreadcrumbs from './ProductBreadcrumbs';
@@ -79,9 +79,15 @@ const ProductComponent: React.FC<ProductProps> = ({
           <ProductDescription description={description} />
         </Grid>
 
-        <Grid item xs={12}>
-          <FeaturedProducts products={otherProducts} />
-        </Grid>
+        {!!otherProducts.length && (
+          <Grid item xs={12}>
+            <Typography variant="h5" component="h3">
+              Вас може зацікавити:
+            </Typography>
+
+            <FeaturedProducts products={otherProducts} />
+          </Grid>
+        )}
       </Grid>
     </Container>
   );
