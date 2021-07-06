@@ -1,3 +1,5 @@
+import { Container } from '@material-ui/core';
+
 import { ProductPreview, HeroSlide, Category, PageMeta } from 'domain/types';
 import {
   CategoriesRepo,
@@ -7,8 +9,8 @@ import {
 } from 'domain/repositories';
 import HeroSlider from 'components/home/HeroSlider/HeroSlider';
 import Layout from 'components/layout/Layout';
-import FeaturedProducts from 'components/home/FeaturedProducts/FeaturedProducts';
-import CategoryTiles from 'components/home/CategoryTiles/CategoryTiles';
+import FeaturedProducts from 'components/product/FeaturedProducts/FeaturedProducts';
+import CategoryTiles from 'components/shop/CategoryTiles/CategoryTiles';
 
 interface HomeProps {
   heroSlides: Array<HeroSlide>;
@@ -27,7 +29,9 @@ const Home: React.FC<HomeProps> = ({
     <Layout pageMeta={pageMeta}>
       <HeroSlider heroSlides={heroSlides} />
 
-      <FeaturedProducts products={featuredProducts} />
+      <Container>
+        <FeaturedProducts products={featuredProducts} title="Новинки:" />
+      </Container>
 
       <CategoryTiles categories={categories} />
     </Layout>

@@ -9,6 +9,7 @@ import ProductGallery from './ProductGallery';
 import ColorPanel from 'components/product/ColorPanel';
 import BuyBlock from './BuyBlock/BuyBlock';
 import ProductDescription from './ProductDescription';
+import FeaturedProducts from 'components/product/FeaturedProducts/FeaturedProducts';
 
 interface ProductProps {
   product: Product;
@@ -25,12 +26,11 @@ const ProductComponent: React.FC<ProductProps> = ({
     available,
     price,
     description,
-    ...rest
+    youMayAlsoLikeCollection: { items: otherProducts }
   }
 }): JSX.Element => {
   const classes = useStyles();
   const { activeColor } = useProductColor(productColors);
-  console.log(rest);
 
   const handleBuy = () => {};
 
@@ -69,7 +69,7 @@ const ProductComponent: React.FC<ProductProps> = ({
 
         <Grid item xs={12}>
           <BuyBlock
-            available={activeColor ? activeColor.available : available}
+            available={available && activeColor ? activeColor.available : available}
             price={price}
             onBuy={handleBuy}
           />
@@ -77,6 +77,10 @@ const ProductComponent: React.FC<ProductProps> = ({
 
         <Grid item xs={12}>
           <ProductDescription description={description} />
+        </Grid>
+
+        <Grid item xs={12}>
+          <FeaturedProducts products={otherProducts} />
         </Grid>
       </Grid>
     </Container>

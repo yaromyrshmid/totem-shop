@@ -1,7 +1,7 @@
 import { Category, PageMeta } from 'domain/types';
 import { CategoriesRepo, PageMetaRepo } from 'domain/repositories';
 import Layout from 'components/layout/Layout';
-import CategoryTiles from 'components/home/CategoryTiles/CategoryTiles';
+import CategoryTiles from 'components/shop/CategoryTiles/CategoryTiles';
 
 interface ShopPageProps {
   categories: Array<Category>;

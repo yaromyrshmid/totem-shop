@@ -85,6 +85,9 @@ export abstract class ProductsRepo {
                 sys {
                   id
                 }
+                category {
+                  slug
+                }
               }
             }
             colorsCollection {

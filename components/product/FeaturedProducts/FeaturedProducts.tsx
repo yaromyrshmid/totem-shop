@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, makeStyles, Typography, useTheme } from '@material-ui/core';
+import { Box, makeStyles, Typography, useTheme } from '@material-ui/core';
 
 import { ProductPreview } from 'domain/types';
 import Carousel from 'components/ui/Carousel';
@@ -7,21 +7,24 @@ import FeaturedProductItem from './FeaturedProductItem';
 
 interface FeaturedProductsProps {
   products: Array<ProductPreview>;
+  title?: string;
 }
 
-const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }): JSX.Element => {
+const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products, title }): JSX.Element => {
   const classes = useStyles();
   const {
     breakpoints: { values: breakpoints }
   } = useTheme();
 
   return (
-    <Container>
-      <Box mb={4}>
-        <Typography variant="h4" component="h2">
-          Новинки:
-        </Typography>
-      </Box>
+    <>
+      {!!title && (
+        <Box mb={4}>
+          <Typography variant="h4" component="h2">
+            {title}
+          </Typography>
+        </Box>
+      )}
 
       <Carousel
         settings={{
@@ -59,7 +62,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }): JSX.El
           />
         ))}
       </Carousel>
-    </Container>
+    </>
   );
 };
 
