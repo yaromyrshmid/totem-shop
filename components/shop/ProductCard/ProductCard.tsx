@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import CustomA from 'components/ui/links/CustomA';
 import { ColorPreview, ProductPreview } from 'domain/types';
-import ColorPanel from './ColorPanel';
+import ColorPanel from '../../product/ColorPanel';
 
 interface ProductCardProps {
   product: ProductPreview;

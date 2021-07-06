@@ -31,6 +31,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }): JSX.Element 
         naturalSlideWidth={100}
         naturalSlideHeight={100}
         totalSlides={images.length}
+        className={classes.container}
       >
         <Box className={classes.carouselContent}>
           <Slider className={classes.slider}>
@@ -62,6 +63,9 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }): JSX.Element 
 
 const previewImageSize = 100;
 const useStyles = makeStyles((theme) => ({
+  container: {
+    marginBottom: theme.spacing(2)
+  },
   carouselContent: {},
   slider: {
     margin: 'auto',

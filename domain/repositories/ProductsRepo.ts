@@ -57,6 +57,7 @@ export abstract class ProductsRepo {
               id
             }
             name
+            slug
             price
             description {
               json

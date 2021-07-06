@@ -9,9 +9,17 @@ interface ColorPanelProps {
   productSlug: string;
   colors?: Array<ColorPreview>;
   colorSlug?: string;
+  pathPrefix?: string;
+  useShallowRouting?: boolean;
 }
 
-const ColorPanel: React.FC<ColorPanelProps> = ({ colors, productSlug, colorSlug }): JSX.Element => {
+const ColorPanel: React.FC<ColorPanelProps> = ({
+  colors,
+  productSlug,
+  colorSlug,
+  pathPrefix = '',
+  useShallowRouting = false
+}): JSX.Element => {
   const classes = useStyles();
 
   if (!colors || !colors.length || !colorSlug) return <></>;
@@ -19,7 +27,12 @@ const ColorPanel: React.FC<ColorPanelProps> = ({ colors, productSlug, colorSlug 
   return (
     <Box className={classes.container}>
       {colors.map((color) => (
-        <Link href={`${productSlug}?color=${color.slug}`} passHref key={color.sys.id}>
+        <Link
+          href={`${pathPrefix}${productSlug}?color=${color.slug}`}
+          passHref
+          key={color.sys.id}
+          shallow={useShallowRouting}
+        >
           <CustomA>
             <Box className={classes.item} style={{ backgroundColor: color.hexColor }}>
               {colorSlug === color.slug && <Box className={classes.activeBorder} />}

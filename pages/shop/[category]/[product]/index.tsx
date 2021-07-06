@@ -43,7 +43,7 @@ interface ProductPageContext {
 
 export const getStaticProps = async (ctx: ProductPageContext) => {
   const {
-    params: { product: productSlug }
+    params: { product: productSlug, category: categorySlug }
   } = ctx;
 
   const [pageMeta, productId] = await Promise.all([
@@ -51,11 +51,11 @@ export const getStaticProps = async (ctx: ProductPageContext) => {
     ProductsRepo.getIdBySlug(productSlug)
   ]);
 
-  if (!productId) {
-    return { notFound: true };
-  }
+  if (!productId) return { notFound: true };
 
   const product = await ProductsRepo.getById(productId);
+
+  if (!product || categorySlug !== product.category.slug) return { notFound: true };
 
   return {
     props: {

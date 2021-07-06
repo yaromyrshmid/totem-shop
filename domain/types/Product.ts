@@ -19,12 +19,14 @@ export type ColoredProduct = {
   imagesCollection: { items: Array<Image> };
   available: boolean;
   sys: SysId;
+  hexColor: string;
 };
 
 export type Product = {
   sys: SysId;
   name: string;
   price: number;
+  slug: string;
   description: {
     json: JSON;
   };
