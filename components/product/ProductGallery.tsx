@@ -12,7 +12,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import Image from 'next/image';
 
 import { Image as ImageType } from 'domain/types';
-import { makeStyles, Box } from '@material-ui/core';
+import { makeStyles, Box, useTheme } from '@material-ui/core';
 import { useScrollBarStyles } from 'theme/scrollBar';
 import classnames from 'classnames';
 
@@ -22,6 +22,7 @@ interface ProductGalleryProps {
 
 const ProductGallery: React.FC<ProductGalleryProps> = ({ images }): JSX.Element => {
   const classes = useStyles();
+  const theme = useTheme();
   const scrollBarClasses = useScrollBarStyles();
 
   return (
@@ -30,7 +31,6 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }): JSX.Element 
         naturalSlideWidth={100}
         naturalSlideHeight={100}
         totalSlides={images.length}
-        //   currentSlide={props.currentSlide}
       >
         <Box className={classes.carouselContent}>
           <Slider className={classes.slider}>
@@ -42,9 +42,15 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }): JSX.Element 
           </Slider>
 
           <Box className={classnames(classes.dotsContainer, scrollBarClasses.vertical)}>
+            <style>
+              {`.carousel__dot--selected {
+                    border-color: ${theme.palette.primary.main};
+                }`}
+            </style>
+
             {images.map(({ url }, index) => (
               <Dot slide={index} key={`dot-${url}`} className={classes.dot}>
-                <Image src={url} height={200} width={200} />
+                <Image src={url} height={previewImageSize} width={previewImageSize} />
               </Dot>
             ))}
           </Box>
@@ -54,6 +60,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }): JSX.Element 
   );
 };
 
+const previewImageSize = 100;
 const useStyles = makeStyles((theme) => ({
   carouselContent: {},
   slider: {
@@ -64,11 +71,19 @@ const useStyles = makeStyles((theme) => ({
   dotsContainer: {
     overflowX: 'auto',
     whiteSpace: 'nowrap',
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    maxWidth: 450,
+    margin: 'auto'
   },
   dot: {
     display: 'inline',
-    width: 90
+    width: previewImageSize,
+    height: previewImageSize,
+    padding: 0,
+    backgroundColor: theme.palette.common.white,
+    borderWidth: 2,
+    borderColor: theme.palette.common.white,
+    borderStyle: 'solid'
   }
 }));
 
