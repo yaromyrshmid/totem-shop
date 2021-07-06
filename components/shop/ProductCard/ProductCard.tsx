@@ -48,7 +48,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </Typography>
 
             <Typography variant="h6" component="p" color="secondary">
-              {price} грн.
+              {price} грн
             </Typography>
           </Box>
         </Card>

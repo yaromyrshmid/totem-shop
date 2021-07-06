@@ -78,7 +78,8 @@ const ProductComponent: React.FC<ProductProps> = ({
 const useStyles = makeStyles((theme) => ({
   colorsContainer: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: theme.spacing(1)
   }
 }));
 

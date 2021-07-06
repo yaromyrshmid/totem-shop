@@ -22,7 +22,7 @@ const AvailabilityMarker: React.FC<AvailabilityMarkerProps> = ({ available }): J
           />
 
           <Typography variant="body1" className={classes.textSuccess}>
-            Є в наявності
+            в наявності
           </Typography>
         </>
       ) : (
@@ -34,7 +34,7 @@ const AvailabilityMarker: React.FC<AvailabilityMarkerProps> = ({ available }): J
           />
 
           <Typography variant="body1" className={classes.textError}>
-            Немає в наявності
+            немає в наявності
           </Typography>
         </>
       )}

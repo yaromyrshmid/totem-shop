@@ -57,7 +57,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
                 color="secondary"
                 className={classes.priceText}
               >
-                {price} грн.
+                {price} грн
               </Typography>
             </Box>
           </Box>
