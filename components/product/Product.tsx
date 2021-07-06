@@ -45,7 +45,7 @@ const ProductComponent: React.FC<ProductProps> = ({
       <ProductTitle name={name} colorName={activeColor?.color} />
 
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <ProductGallery
             images={
               activeColor
@@ -55,28 +55,30 @@ const ProductComponent: React.FC<ProductProps> = ({
           />
         </Grid>
 
-        <Grid item xs={12}>
-          <Box className={classes.colorsContainer}>
-            <ColorPanel
-              colors={productColors}
-              productSlug={slug}
-              colorSlug={activeColor?.slug}
-              pathPrefix={`/shop/${categorySlug}/`}
-              useShallowRouting
-            />
+        <Grid item xs={12} md={6}>
+          <Box className={classes.infoContainer}>
+            <Box className={classes.colorsContainer}>
+              <ColorPanel
+                colors={productColors}
+                productSlug={slug}
+                colorSlug={activeColor?.slug}
+                pathPrefix={`/shop/${categorySlug}/`}
+                useShallowRouting
+              />
+            </Box>
+
+            <Box className={classes.buyContainer}>
+              <BuyBlock
+                available={available && activeColor ? activeColor.available : available}
+                price={price}
+                onBuy={handleBuy}
+              />
+            </Box>
+
+            <Box className={classes.descriptionContainer}>
+              <ProductDescription description={description} />
+            </Box>
           </Box>
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          <BuyBlock
-            available={available && activeColor ? activeColor.available : available}
-            price={price}
-            onBuy={handleBuy}
-          />
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          <ProductDescription description={description} />
         </Grid>
 
         {!!otherProducts.length && (
@@ -94,9 +96,43 @@ const ProductComponent: React.FC<ProductProps> = ({
 };
 
 const useStyles = makeStyles((theme) => ({
+  infoContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gridTemplateAreas: `"colorsContainer colorsContainer"
+        "buyContainer descriptionContainer"`
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  },
   colorsContainer: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    gridArea: 'colorsContainer',
+    [theme.breakpoints.up('md')]: {
+      justifyContent: 'flex-start'
+    }
+  },
+  buyContainer: {
+    gridArea: 'buyContainer',
+    [theme.breakpoints.up('md')]: {
+      width: '60%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '50%'
+    }
+  },
+  descriptionContainer: {
+    gridArea: 'descriptionContainer',
+    [theme.breakpoints.up('lg')]: {
+      width: '75%'
+    }
   }
 }));
 

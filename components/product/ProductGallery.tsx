@@ -52,13 +52,34 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }): JSX.Element 
 
 const imageSize = 450;
 const previewImageSize = 100;
+const verticalContainer = {
+  display: 'flex',
+  flexDirection: 'row-reverse',
+  justifyContent: 'center',
+  alignItems: 'flex-start'
+};
+const verticalSlider = {
+  height: imageSize,
+  width: imageSize,
+  margin: 0
+};
+const verticalDotsContainer = {
+  margin: 0,
+  display: 'flex',
+  flexDirection: 'column',
+  height: imageSize,
+  overflowY: 'auto',
+  overflowX: 'hidden',
+  ...scrollBarStyles.vertical
+};
 const useStyles = makeStyles((theme) => ({
   container: {
-    [theme.breakpoints.up('sm')]: {
-      display: 'flex',
-      flexDirection: 'row-reverse',
-      justifyContent: 'center',
-      alignItems: 'flex-start',
+    [theme.breakpoints.only('sm')]: {
+      ...verticalContainer,
+      gap: theme.spacing(1)
+    },
+    [theme.breakpoints.up('lg')]: {
+      ...verticalContainer,
       gap: theme.spacing(1)
     }
   },
@@ -66,10 +87,11 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
     maxHeight: imageSize,
     maxWidth: imageSize,
-    [theme.breakpoints.up('sm')]: {
-      height: imageSize,
-      width: imageSize,
-      margin: 0
+    [theme.breakpoints.only('sm')]: {
+      ...verticalSlider
+    },
+    [theme.breakpoints.up('lg')]: {
+      ...verticalSlider
     }
   },
   dotsContainer: {
@@ -81,14 +103,11 @@ const useStyles = makeStyles((theme) => ({
       overflowX: 'auto',
       ...scrollBarStyles.horizontal
     },
-    [theme.breakpoints.up('sm')]: {
-      margin: 0,
-      display: 'flex',
-      flexDirection: 'column',
-      height: imageSize,
-      overflowY: 'auto',
-      overflowX: 'hidden',
-      ...scrollBarStyles.vertical
+    [theme.breakpoints.only('sm')]: {
+      ...verticalDotsContainer
+    },
+    [theme.breakpoints.up('lg')]: {
+      ...verticalDotsContainer
     }
   },
   dot: {
