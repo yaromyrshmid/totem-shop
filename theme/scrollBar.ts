@@ -1,18 +1,28 @@
-import { makeStyles } from '@material-ui/core';
+import palette from './palette';
 
-export const useScrollBarStyles = makeStyles((theme) => ({
-  vertical: {
+const thumbStyles = {
+  '&::-webkit-scrollbar-thumb': {
+    background: palette.primary.main,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: palette.common.white
+  },
+  '&::-webkit-scrollbar-thumb:hover': {
+    background: palette.secondary.main
+  }
+};
+
+export const scrollBarStyles = {
+  horizontal: {
     '&::-webkit-scrollbar': {
       height: 10
     },
-    '&::-webkit-scrollbar-thumb': {
-      background: theme.palette.primary.main,
-      borderWidth: 2,
-      borderStyle: 'solid',
-      borderColor: theme.palette.common.white
+    ...thumbStyles
+  },
+  vertical: {
+    '&::-webkit-scrollbar': {
+      width: 10
     },
-    '&::-webkit-scrollbar-thumb:hover': {
-      background: theme.palette.secondary.main
-    }
+    ...thumbStyles
   }
-}));
+};

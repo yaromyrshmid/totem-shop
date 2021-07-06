@@ -44,7 +44,7 @@ const ProductComponent: React.FC<ProductProps> = ({
 
       <ProductTitle name={name} colorName={activeColor?.color} />
 
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
           <ProductGallery
             images={
@@ -67,7 +67,7 @@ const ProductComponent: React.FC<ProductProps> = ({
           </Box>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <BuyBlock
             available={available && activeColor ? activeColor.available : available}
             price={price}
@@ -75,7 +75,7 @@ const ProductComponent: React.FC<ProductProps> = ({
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <ProductDescription description={description} />
         </Grid>
 
@@ -96,8 +96,7 @@ const ProductComponent: React.FC<ProductProps> = ({
 const useStyles = makeStyles((theme) => ({
   colorsContainer: {
     display: 'flex',
-    justifyContent: 'center',
-    marginBottom: theme.spacing(1)
+    justifyContent: 'center'
   }
 }));
 

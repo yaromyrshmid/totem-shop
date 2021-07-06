@@ -2,7 +2,8 @@ import { green, grey, red } from '@material-ui/core/colors';
 
 const palette = {
   common: {
-    black: '#393939'
+    black: '#393939',
+    white: '#ffffff'
   },
 
   primary: {

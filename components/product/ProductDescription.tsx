@@ -9,7 +9,7 @@ interface ProductDescriptionProps {
 }
 
 const ProductDescription: React.FC<ProductDescriptionProps> = ({ description }): JSX.Element => {
-  return <Box mb={2}>{documentToReactComponents(description.json)}</Box>;
+  return <Box>{documentToReactComponents(description.json)}</Box>;
 };
 
 export default ProductDescription;

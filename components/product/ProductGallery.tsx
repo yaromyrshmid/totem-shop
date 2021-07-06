@@ -1,20 +1,12 @@
 import React from 'react';
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-  Dot,
-  ImageWithZoom
-} from 'pure-react-carousel';
+import { CarouselProvider, Slider, Slide, Dot, ImageWithZoom } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import Image from 'next/image';
+import { makeStyles, Box, useTheme } from '@material-ui/core';
+import classnames from 'classnames';
 
 import { Image as ImageType } from 'domain/types';
-import { makeStyles, Box, useTheme } from '@material-ui/core';
-import { useScrollBarStyles } from 'theme/scrollBar';
-import classnames from 'classnames';
+import { scrollBarStyles } from 'theme/scrollBar';
 
 interface ProductGalleryProps {
   images: Array<ImageType>;
@@ -23,7 +15,6 @@ interface ProductGalleryProps {
 const ProductGallery: React.FC<ProductGalleryProps> = ({ images }): JSX.Element => {
   const classes = useStyles();
   const theme = useTheme();
-  const scrollBarClasses = useScrollBarStyles();
 
   return (
     <div>
@@ -33,51 +24,72 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }): JSX.Element 
         totalSlides={images.length}
         className={classes.container}
       >
-        <Box className={classes.carouselContent}>
-          <Slider className={classes.slider}>
-            {images.map((image, index) => (
-              <Slide index={index} key={image.url}>
-                <ImageWithZoom src={image.url} />
-              </Slide>
-            ))}
-          </Slider>
+        <Slider className={classes.slider}>
+          {images.map((image, index) => (
+            <Slide index={index} key={image.url}>
+              <ImageWithZoom src={image.url} />
+            </Slide>
+          ))}
+        </Slider>
 
-          <Box className={classnames(classes.dotsContainer, scrollBarClasses.vertical)}>
-            <style>
-              {`.carousel__dot--selected {
+        <Box className={classes.dotsContainer}>
+          <style>
+            {`.carousel__dot--selected {
                     border-color: ${theme.palette.primary.main};
                 }`}
-            </style>
+          </style>
 
-            {images.map(({ url }, index) => (
-              <Dot slide={index} key={`dot-${url}`} className={classes.dot}>
-                <Image src={url} height={previewImageSize} width={previewImageSize} />
-              </Dot>
-            ))}
-          </Box>
+          {images.map(({ url }, index) => (
+            <Dot slide={index} key={`dot-${url}`} className={classes.dot}>
+              <Image src={url} height={previewImageSize} width={previewImageSize} />
+            </Dot>
+          ))}
         </Box>
       </CarouselProvider>
     </div>
   );
 };
 
+const imageSize = 450;
 const previewImageSize = 100;
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginBottom: theme.spacing(2)
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      flexDirection: 'row-reverse',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      gap: theme.spacing(1)
+    }
   },
-  carouselContent: {},
   slider: {
     margin: 'auto',
-    maxHeight: 450,
-    maxWidth: 450
+    maxHeight: imageSize,
+    maxWidth: imageSize,
+    [theme.breakpoints.up('sm')]: {
+      height: imageSize,
+      width: imageSize,
+      margin: 0
+    }
   },
   dotsContainer: {
-    overflowX: 'auto',
     whiteSpace: 'nowrap',
     marginTop: theme.spacing(1),
-    maxWidth: 450,
-    margin: 'auto'
+    maxWidth: imageSize,
+    margin: 'auto',
+    [theme.breakpoints.only('xs')]: {
+      overflowX: 'auto',
+      ...scrollBarStyles.horizontal
+    },
+    [theme.breakpoints.up('sm')]: {
+      margin: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      height: imageSize,
+      overflowY: 'auto',
+      overflowX: 'hidden',
+      ...scrollBarStyles.vertical
+    }
   },
   dot: {
     display: 'inline',

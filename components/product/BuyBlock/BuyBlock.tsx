@@ -14,7 +14,7 @@ const BuyBlock: React.FC<BuyBlockProps> = ({ available, price, onBuy }): JSX.Ele
   const classes = useStyles();
 
   return (
-    <Box mb={2}>
+    <Box>
       <Box className={classes.availabilityPriceContainer} mb={1}>
         <AvailabilityMarker available={available} />
 
