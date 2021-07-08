@@ -5,16 +5,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { Menu } from '@material-ui/icons';
-// import Cart from "../Cart/Cart"
+
 import LinkedLogo from './Shared/LinkedLogo';
 import NavItems from './Shared/NavItems';
+import CartHeaderIcon from 'components/cart/CartHeaderIcon';
 
 interface HeaderProps {
   pageTitle?: string;
-  openDrawer: () => void;
+  onOpenDrawer: () => void;
+  onOpenCart: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ pageTitle, openDrawer }: HeaderProps): JSX.Element => {
+const Header: React.FC<HeaderProps> = ({ pageTitle, onOpenDrawer, onOpenCart }): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -28,13 +30,13 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, openDrawer }: HeaderProps): 
 
         <NavItems />
 
-        {/* <Cart /> */}
+        <CartHeaderIcon onClick={onOpenCart} />
 
         <IconButton
           className={classes.menuButton}
           color="inherit"
           aria-label="open drawer"
-          onClick={openDrawer}
+          onClick={onOpenDrawer}
         >
           <Menu />
         </IconButton>
