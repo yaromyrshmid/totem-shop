@@ -3,9 +3,10 @@ import { ApolloProvider } from '@apollo/client/react';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { ThemeProvider } from '@material-ui/styles';
 
-import { apolloClient } from '../apollo-client';
+import { apolloClient } from '../utils/apollo/apollo-client';
 import { theme } from '../theme';
 import { CssBaseline } from '@material-ui/core';
+import CartProvider from 'components/cart/CartProvider';
 
 const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -19,8 +20,10 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={apolloClient}>
-        <CssBaseline />
-        <Component {...pageProps} />
+        <CartProvider>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </CartProvider>
       </ApolloProvider>
     </ThemeProvider>
   );

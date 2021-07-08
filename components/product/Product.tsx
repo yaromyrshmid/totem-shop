@@ -10,6 +10,7 @@ import ColorPanel from 'components/product/ColorPanel';
 import BuyBlock from './BuyBlock/BuyBlock';
 import ProductDescription from './ProductDescription';
 import FeaturedProducts from 'components/product/FeaturedProducts/FeaturedProducts';
+import { clientAddToCart } from 'utils/apollo/cartVar';
 
 interface ProductProps {
   product: Product;
@@ -26,13 +27,16 @@ const ProductComponent: React.FC<ProductProps> = ({
     available,
     price,
     description,
-    youMayAlsoLikeCollection: { items: otherProducts }
+    youMayAlsoLikeCollection: { items: otherProducts },
+    sys: { id }
   }
 }): JSX.Element => {
   const classes = useStyles();
   const { activeColor } = useProductColor(productColors);
 
-  const handleBuy = () => {};
+  const handleBuy = () => {
+    clientAddToCart(activeColor?.sys.id || id);
+  };
 
   return (
     <Container>

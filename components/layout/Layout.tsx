@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { useMediaQuery, useTheme } from '@material-ui/core';
 
 import Header from './Header';
@@ -35,8 +34,6 @@ const Layout: React.FC<LayoutProps> = ({ children, pageMeta }): JSX.Element => {
 
   return (
     <PageMetaContext.Provider value={pageMeta}>
-      <CssBaseline />
-
       <Header openDrawer={handleOpenDrawer} />
 
       {!isDesktop && <Drawer showDrawer={showDrawer} closeDrawer={handleCloseDrawer} />}

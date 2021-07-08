@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import { apolloClient } from '../../apollo-client';
+import { apolloClient } from '../../utils/apollo/apollo-client';
 import { Product, ProductIdOnly, ProductSlugOnly } from 'domain/types';
 import { Collection } from './core/Collection';
 import { Result } from './core/Result';
