@@ -6,7 +6,7 @@ import Drawer from './Drawer';
 import Footer from './Footer/Footer';
 import { PageMeta } from 'domain/types';
 import { PageMetaContext } from 'utils/context/PageMetaContext';
-import CartModal from 'components/cart/CartModal';
+import CartModal from 'components/cart/CartModal/CartModal';
 
 interface LayoutProps {
   children: React.ReactNode;

@@ -33,9 +33,9 @@ const Modal: React.FC<ModalProps> = ({
         }
       }}
     >
-      {!!title && <DialogTitle>{title}</DialogTitle>}
+      {!!title && <DialogTitle className={classes.titleContainer}>{title}</DialogTitle>}
 
-      <DialogContent>{children}</DialogContent>
+      <DialogContent className={classes.contentContainer}>{children}</DialogContent>
 
       {!!actionsComponent && <DialogActions>{actionsComponent}</DialogActions>}
     </Dialog>
@@ -48,7 +48,17 @@ const useStyles = makeStyles((theme) => ({
     opacity: `0.2 !important`
   },
   container: {
-    boxShadow: 'none'
+    boxShadow: 'none',
+    margin: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      margin: theme.spacing(2.5)
+    }
+  },
+  titleContainer: {
+    padding: theme.spacing(1.5)
+  },
+  contentContainer: {
+    padding: `${theme.spacing(1)}px ${theme.spacing(1.5)}px`
   }
 }));
 

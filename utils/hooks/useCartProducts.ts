@@ -1,5 +1,6 @@
 import { gql, useQuery, useReactiveVar } from '@apollo/client';
 import { CartProduct, ColoredCartProduct } from 'domain/types';
+import { useMemo } from 'react';
 
 import { cartVar } from 'utils/apollo/cartVar';
 
@@ -80,12 +81,45 @@ export const useCartProducts = () => {
         }
       },
       productCollectionLimit: 1
-    }
+    },
+    ssr: false
   });
+
+  const products = useMemo(
+    () =>
+      data
+        ? [
+            ...transformeColoredProducts(data.coloredProductCollection.items),
+            ...data.productCollection.items
+          ]
+        : [],
+    [data]
+  );
 
   return {
     loading,
     error,
-    products: data ? [...data.coloredProductCollection.items, ...data.productCollection.items] : []
+    products
   };
 };
+
+const transformeColoredProducts = (coloredProducts: ColoredCartProduct[]): CartProduct[] =>
+  coloredProducts.map(transformColored);
+
+const transformColored = ({
+  color,
+  sys,
+  mainImage,
+  linkedFrom: {
+    productCollection: {
+      items: [product]
+    }
+  }
+}: ColoredCartProduct): CartProduct => ({
+  sys,
+  name: `${product.name} - ${color}`,
+  price: product.price,
+  slug: `${product.slug}?color=${color}`,
+  category: product.category,
+  mainImage
+});
