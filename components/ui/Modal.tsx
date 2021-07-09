@@ -37,7 +37,9 @@ const Modal: React.FC<ModalProps> = ({
 
       <DialogContent className={classes.contentContainer}>{children}</DialogContent>
 
-      {!!actionsComponent && <DialogActions>{actionsComponent}</DialogActions>}
+      {!!actionsComponent && (
+        <DialogActions className={classes.actionsContainer}>{actionsComponent}</DialogActions>
+      )}
     </Dialog>
   );
 };
@@ -59,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
   },
   contentContainer: {
     padding: `${theme.spacing(1)}px ${theme.spacing(1.5)}px`
+  },
+  actionsContainer: {
+    justifyContent: 'space-between'
   }
 }));
 

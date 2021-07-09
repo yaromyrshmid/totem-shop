@@ -7,6 +7,7 @@ import { cartVar, addToCart, substractFromCart, removeFromCart } from 'utils/apo
 import CartProduct from './CartProduct/CartProduct';
 import { countTotalPrice } from 'utils/helpers/countTotalPrice';
 import TotalPrice from './TotalPrice';
+import CartModalActions from './CartModalActions';
 
 interface CartModalProps {
   open: boolean;
@@ -18,10 +19,15 @@ const CartModal: React.FC<CartModalProps> = ({ onClose, open }): JSX.Element => 
 
   const { products, loading, error } = useCartProducts();
 
-  console.log({ products, loading, error });
+  const handleCheckout = () => {};
 
   return (
-    <Modal open={open} onClose={onClose} title="Кошик">
+    <Modal
+      open={open}
+      onClose={onClose}
+      title="Кошик"
+      actionsComponent={<CartModalActions onClose={onClose} onCheckout={handleCheckout} />}
+    >
       {products.map((product) => (
         <CartProduct
           key={product.sys.id}
