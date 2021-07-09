@@ -14,7 +14,7 @@ const Price: React.FC<PriceProps> = ({ price, quantity, className }): JSX.Elemen
     return (
       <Box className={className}>
         <Typography variant="body2">
-          <span className={classes.emphesized}>Ціна:</span> {price.toFixed(0)}грн
+          <span className={classes.emphasized}>Ціна:</span> {price.toFixed(0)} грн
         </Typography>
       </Box>
     );
@@ -23,17 +23,17 @@ const Price: React.FC<PriceProps> = ({ price, quantity, className }): JSX.Elemen
   return (
     <Box className={className}>
       <Typography variant="caption">
-        <span className={classes.emphesized}>За одиницю:</span> {price.toFixed(0)}грн
+        <span className={classes.emphasized}>За одиницю:</span> {price.toFixed(0)} грн
       </Typography>
       <Typography variant="body2">
-        <span className={classes.emphesized}>Всього:</span> {(price * quantity).toFixed(0)}грн
+        <span className={classes.emphasized}>Всього:</span> {(price * quantity).toFixed(0)} грн
       </Typography>
     </Box>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
-  emphesized: {
+  emphasized: {
     color: theme.palette.primary.main,
     fontWeight: 600
   }

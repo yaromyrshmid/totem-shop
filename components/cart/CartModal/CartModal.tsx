@@ -5,6 +5,8 @@ import Modal from 'components/ui/Modal';
 import { useCartProducts } from 'utils/hooks/useCartProducts';
 import { cartVar, addToCart, substractFromCart, removeFromCart } from 'utils/apollo/cartVar';
 import CartProduct from './CartProduct/CartProduct';
+import { countTotalPrice } from 'utils/helpers/countTotalPrice';
+import TotalPrice from './TotalPrice';
 
 interface CartModalProps {
   open: boolean;
@@ -30,6 +32,8 @@ const CartModal: React.FC<CartModalProps> = ({ onClose, open }): JSX.Element => 
           onRemove={() => removeFromCart(product.sys.id)}
         />
       ))}
+
+      <TotalPrice price={countTotalPrice(cart, products)} />
     </Modal>
   );
 };
