@@ -3,7 +3,7 @@ import { useReactiveVar } from '@apollo/client';
 
 import Modal from 'components/ui/Modal';
 import { useCartProducts } from 'utils/hooks/useCartProducts';
-import { cartVar, addToCart, substractFromCart } from 'utils/apollo/cartVar';
+import { cartVar, addToCart, substractFromCart, removeFromCart } from 'utils/apollo/cartVar';
 import CartProduct from './CartProduct/CartProduct';
 
 interface CartModalProps {
@@ -24,9 +24,10 @@ const CartModal: React.FC<CartModalProps> = ({ onClose, open }): JSX.Element => 
         <CartProduct
           key={product.sys.id}
           product={product}
-          quantity={cart.find(({ id }) => id === product.sys.id)?.quantity}
+          quantity={cart.find(({ id }) => id === product.sys.id)?.quantity || 0}
           onIncrease={() => addToCart(product.sys.id)}
           onDecrease={() => substractFromCart(product.sys.id)}
+          onRemove={() => removeFromCart(product.sys.id)}
         />
       ))}
     </Modal>

@@ -31,6 +31,13 @@ export const substractFromCart = (productId: string) => {
   updateCart(updatedCart);
 };
 
+export const removeFromCart = (productId: string) => {
+  const previosCart = cartVar();
+
+  const updatedCart = previosCart.filter(({ id }) => id !== productId);
+  updateCart(updatedCart);
+};
+
 const updateCart = (updatedCart: CartItem[]) => {
   cartVar(updatedCart);
   writeLocalStorage(LOCAL_STORAGE_KEYS.cart, updatedCart);

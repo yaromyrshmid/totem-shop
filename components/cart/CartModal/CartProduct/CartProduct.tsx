@@ -1,17 +1,21 @@
 import React from 'react';
 import Image from 'next/image';
-import { Box, makeStyles, Typography } from '@material-ui/core';
+import { Box, makeStyles, Typography, Button } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 import { CartProduct } from 'domain/types';
 import CustomA from 'components/ui/links/CustomA';
 import QuantityControls from './QuantityControls';
 import { scrollBarStyles } from 'theme/scrollBar';
+import Price from './Price';
 
 interface CartProductProps {
   product: CartProduct;
+  quantity: number;
   onDecrease: () => void;
   onIncrease: () => void;
-  quantity?: number;
+  onRemove: () => void;
 }
 
 const CartProductComponent: React.FC<CartProductProps> = ({
@@ -19,11 +23,13 @@ const CartProductComponent: React.FC<CartProductProps> = ({
     name,
     mainImage: { url: image },
     category: { slug: categorySlug },
-    slug
+    slug,
+    price
   },
-  quantity = 0,
+  quantity,
   onDecrease,
-  onIncrease
+  onIncrease,
+  onRemove
 }): JSX.Element => {
   const classes = useStyles();
 
@@ -39,6 +45,14 @@ const CartProductComponent: React.FC<CartProductProps> = ({
         </CustomA>
 
         <QuantityControls quantity={quantity} onDecrease={onDecrease} onIncrease={onIncrease} />
+
+        <Box className={classes.priceBlock}>
+          <Price quantity={quantity} price={price} className={classes.priceContainer} />
+
+          <Button onClick={onRemove} variant="text" className={classes.deleteButton}>
+            <FontAwesomeIcon icon={faTrashAlt} />
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
@@ -60,10 +74,26 @@ const useStyles = makeStyles((theme) => ({
   content: {
     width: `calc(50% - ${theme.spacing(0.5)}px)`,
     overflowX: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
     ...scrollBarStyles.horizontal
   },
   title: {
     marginBottom: theme.spacing(1)
+  },
+  priceBlock: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: theme.spacing(0.75)
+  },
+  priceContainer: {
+    flexGrow: 1
+  },
+  deleteButton: {
+    minWidth: 'unset',
+    padding: 0,
+    color: theme.palette.grey[500]
   }
 }));
 

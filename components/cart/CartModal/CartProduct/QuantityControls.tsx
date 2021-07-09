@@ -43,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     gap: theme.spacing(1.5),
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: theme.spacing(1)
   },
   button: {
     minWidth: 'unset',
