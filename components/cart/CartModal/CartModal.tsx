@@ -1,5 +1,6 @@
 import React from 'react';
 import { useReactiveVar } from '@apollo/client';
+import { useRouter } from 'next/router';
 
 import Modal from 'components/ui/Modal';
 import { useCartProducts } from 'utils/hooks/useCartProducts';
@@ -15,11 +16,14 @@ interface CartModalProps {
 }
 
 const CartModal: React.FC<CartModalProps> = ({ onClose, open }): JSX.Element => {
+  const { push } = useRouter();
   const cart = useReactiveVar(cartVar);
 
-  const { products, loading, error } = useCartProducts();
+  const { products } = useCartProducts();
 
-  const handleCheckout = () => {};
+  const handleCheckout = () => {
+    push('/checkout');
+  };
 
   return (
     <Modal

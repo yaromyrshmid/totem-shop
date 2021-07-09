@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, Dialog, DialogTitle, DialogActions, DialogContent } from '@material-ui/core';
+import { scrollBarStyles } from 'theme/scrollBar';
 
 interface ModalProps {
   children: React.ReactNode;
@@ -60,7 +61,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1.5)
   },
   contentContainer: {
-    padding: `${theme.spacing(1)}px ${theme.spacing(1.5)}px`
+    padding: `${theme.spacing(1)}px ${theme.spacing(1.5)}px`,
+    ...scrollBarStyles.vertical
   },
   actionsContainer: {
     justifyContent: 'space-between'
