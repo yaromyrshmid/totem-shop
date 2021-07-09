@@ -9,8 +9,9 @@ import { scrollBarStyles } from 'theme/scrollBar';
 
 interface CartProductProps {
   product: CartProduct;
+  onDecrease: () => void;
+  onIncrease: () => void;
   quantity?: number;
-  onQuantityChange: (id: string, quantity: number) => void;
 }
 
 const CartProductComponent: React.FC<CartProductProps> = ({
@@ -18,18 +19,13 @@ const CartProductComponent: React.FC<CartProductProps> = ({
     name,
     mainImage: { url: image },
     category: { slug: categorySlug },
-    slug,
-    sys: { id }
+    slug
   },
   quantity = 0,
-  onQuantityChange
+  onDecrease,
+  onIncrease
 }): JSX.Element => {
   const classes = useStyles();
-
-  const handleDecrease = () => {
-    if (quantity) onQuantityChange(id, quantity - 1);
-  };
-  const handleIncrease = () => onQuantityChange(id, quantity + 1);
 
   return (
     <Box className={classes.container}>
@@ -42,11 +38,7 @@ const CartProductComponent: React.FC<CartProductProps> = ({
           </Typography>
         </CustomA>
 
-        <QuantityControls
-          quantity={quantity}
-          onDecrease={handleDecrease}
-          onIncrease={handleIncrease}
-        />
+        <QuantityControls quantity={quantity} onDecrease={onDecrease} onIncrease={onIncrease} />
       </Box>
     </Box>
   );

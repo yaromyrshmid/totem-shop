@@ -9,17 +9,29 @@ import {
 
 export const cartVar: ReactiveVar<CartItem[]> = makeVar<CartItem[]>([]);
 
-export const clientInitCart = () => {
+export const initCart = () => {
   const cartFromLocalStorage = readLocalStorage(LOCAL_STORAGE_KEYS.cart);
 
   cartVar(cartFromLocalStorage || []);
 };
 
-export const clientAddToCart = (productId: string) => {
+export const addToCart = (productId: string) => {
   const previosCart = cartVar();
 
   const updatedCart = addToCartItems(previosCart, productId);
 
+  updateCart(updatedCart);
+};
+
+export const substractFromCart = (productId: string) => {
+  const previosCart = cartVar();
+
+  const updatedCart = substractFromCartItems(previosCart, productId);
+
+  updateCart(updatedCart);
+};
+
+const updateCart = (updatedCart: CartItem[]) => {
   cartVar(updatedCart);
   writeLocalStorage(LOCAL_STORAGE_KEYS.cart, updatedCart);
 };
@@ -34,3 +46,10 @@ const addToCartItems = (previosCart: CartItem[], productId: string): Array<CartI
 
   return [...previosCart, { id: productId, quantity: 1 }];
 };
+
+const substractFromCartItems = (previosCart: CartItem[], productId: string): Array<CartItem> =>
+  previosCart.map((item) => {
+    if (item.id === productId && item.quantity) return { ...item, quantity: item.quantity - 1 };
+
+    return item;
+  });

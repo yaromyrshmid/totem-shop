@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { clientInitCart } from 'utils/apollo/cartVar';
+import { initCart } from 'utils/apollo/cartVar';
 
 interface CartProvider {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface CartProvider {
 
 const CartProvider: React.FC<CartProvider> = ({ children }): JSX.Element => {
   useEffect(() => {
-    clientInitCart();
+    initCart();
   }, []);
 
   return <>{children}</>;

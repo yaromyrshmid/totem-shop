@@ -10,7 +10,7 @@ import ColorPanel from 'components/product/ColorPanel';
 import BuyBlock from './BuyBlock/BuyBlock';
 import ProductDescription from './ProductDescription';
 import FeaturedProducts from 'components/product/FeaturedProducts/FeaturedProducts';
-import { clientAddToCart } from 'utils/apollo/cartVar';
+import { addToCart } from 'utils/apollo/cartVar';
 
 interface ProductProps {
   product: Product;
@@ -35,7 +35,7 @@ const ProductComponent: React.FC<ProductProps> = ({
   const { activeColor } = useProductColor(productColors);
 
   const handleBuy = () => {
-    clientAddToCart(activeColor?.sys.id || id);
+    addToCart(activeColor?.sys.id || id);
   };
 
   return (
