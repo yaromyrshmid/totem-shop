@@ -6,9 +6,24 @@ import Contacts from './Contacts';
 import { PageMetaContext } from 'utils/context/PageMetaContext';
 import Copyright from './Copyright';
 
-const Footer: React.FC = (): JSX.Element => {
+interface FooterProps {
+  hideNavigation?: boolean;
+}
+
+const Footer: React.FC<FooterProps> = ({ hideNavigation = false }): JSX.Element => {
   const classes = useStyles();
   const { instagramUrl, viber, telegram, phoneNumber } = useContext(PageMetaContext);
+
+  if (hideNavigation) {
+    return (
+      <Container component="footer" className={classes.container}>
+        <Divider />
+        <Grid item xs={12}>
+          <Copyright />
+        </Grid>
+      </Container>
+    );
+  }
 
   return (
     <Container component="footer" className={classes.container}>

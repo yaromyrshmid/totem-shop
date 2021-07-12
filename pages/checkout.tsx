@@ -10,7 +10,7 @@ interface CheckoutPageProps {
 
 const CheckoutPage: React.FC<CheckoutPageProps> = ({ pageMeta }): JSX.Element => {
   return (
-    <Layout pageMeta={pageMeta}>
+    <Layout pageMeta={pageMeta} minimal>
       <Container>
         <p>checkout</p>
       </Container>

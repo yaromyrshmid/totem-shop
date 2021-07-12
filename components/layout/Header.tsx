@@ -14,9 +14,15 @@ interface HeaderProps {
   pageTitle?: string;
   onOpenDrawer: () => void;
   onOpenCart: () => void;
+  hideNavigation?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ pageTitle, onOpenDrawer, onOpenCart }): JSX.Element => {
+const Header: React.FC<HeaderProps> = ({
+  pageTitle,
+  onOpenDrawer,
+  onOpenCart,
+  hideNavigation = false
+}): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -28,18 +34,22 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, onOpenDrawer, onOpenCart }):
           {pageTitle}
         </Typography>
 
-        <NavItems />
+        {!hideNavigation && (
+          <>
+            <NavItems />
 
-        <CartHeaderIcon onClick={onOpenCart} />
+            <CartHeaderIcon onClick={onOpenCart} />
 
-        <IconButton
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="open drawer"
-          onClick={onOpenDrawer}
-        >
-          <Menu />
-        </IconButton>
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+              onClick={onOpenDrawer}
+            >
+              <Menu />
+            </IconButton>
+          </>
+        )}
       </Toolbar>
     </AppBar>
   );

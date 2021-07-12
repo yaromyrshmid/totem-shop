@@ -11,9 +11,10 @@ import CartModal from 'components/cart/CartModal/CartModal';
 interface LayoutProps {
   children: React.ReactNode;
   pageMeta: PageMeta;
+  minimal?: boolean;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, pageMeta }): JSX.Element => {
+const Layout: React.FC<LayoutProps> = ({ children, pageMeta, minimal = false }): JSX.Element => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -32,12 +33,17 @@ const Layout: React.FC<LayoutProps> = ({ children, pageMeta }): JSX.Element => {
 
   return (
     <PageMetaContext.Provider value={pageMeta}>
-      <Header onOpenDrawer={handleOpenDrawer} onOpenCart={handleOpenCart} />
+      <Header
+        onOpenDrawer={handleOpenDrawer}
+        onOpenCart={handleOpenCart}
+        hideNavigation={minimal}
+      />
 
-      {!isDesktop && <Drawer showDrawer={showDrawer} closeDrawer={handleCloseDrawer} />}
+      {!isDesktop && !minimal && <Drawer showDrawer={showDrawer} closeDrawer={handleCloseDrawer} />}
 
       {children}
-      <Footer />
+
+      <Footer hideNavigation={minimal} />
 
       <CartModal open={showCart} onClose={handleCloseCart} />
     </PageMetaContext.Provider>
