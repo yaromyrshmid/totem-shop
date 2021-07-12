@@ -1,10 +1,8 @@
-import { CartItem, CartProduct } from 'domain/types';
+import { CartProductWQuantity } from 'domain/types';
 
-export const countTotalPrice = (cart: CartItem[], cartProducts: CartProduct[]): number => {
-  const totalPrice = cart.reduce((currentTotal, cartItem) => {
-    const product = cartProducts.find(({ sys: { id } }) => id === cartItem.id);
-
-    if (product) return currentTotal + product.price * cartItem.quantity;
+export const countTotalPrice = (cartProducts: CartProductWQuantity[]): number => {
+  const totalPrice = cartProducts.reduce((currentTotal, product) => {
+    if (product) return currentTotal + product.price * product.quantity;
 
     return currentTotal;
   }, 0);

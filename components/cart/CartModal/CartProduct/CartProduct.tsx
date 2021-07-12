@@ -4,15 +4,14 @@ import { Box, makeStyles, Typography, Button } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
-import { CartProduct } from 'domain/types';
+import { CartProductWQuantity } from 'domain/types';
 import CustomA from 'components/ui/links/CustomA';
 import QuantityControls from './QuantityControls';
 import { scrollBarStyles } from 'theme/scrollBar';
 import Price from './Price';
 
 interface CartProductProps {
-  product: CartProduct;
-  quantity: number;
+  product: CartProductWQuantity;
   onDecrease: () => void;
   onIncrease: () => void;
   onRemove: () => void;
@@ -24,9 +23,9 @@ const CartProductComponent: React.FC<CartProductProps> = ({
     mainImage: { url: image },
     category: { slug: categorySlug },
     slug,
-    price
+    price,
+    quantity
   },
-  quantity,
   onDecrease,
   onIncrease,
   onRemove

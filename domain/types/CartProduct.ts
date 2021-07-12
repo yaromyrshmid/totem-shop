@@ -32,3 +32,7 @@ export type ColoredCartProduct = {
     };
   };
 };
+
+export type CartProductWQuantity = CartProduct & {
+  quantity: number;
+};

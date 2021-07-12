@@ -58,14 +58,23 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   titleContainer: {
-    padding: theme.spacing(1.5)
+    padding: theme.spacing(1.5),
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(2)
+    }
   },
   contentContainer: {
     padding: `${theme.spacing(1)}px ${theme.spacing(1.5)}px`,
-    ...scrollBarStyles.vertical
+    ...scrollBarStyles.vertical,
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(2)
+    }
   },
   actionsContainer: {
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(2)
+    }
   }
 }));
 

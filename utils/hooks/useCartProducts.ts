@@ -1,7 +1,7 @@
-import { gql, useQuery, useReactiveVar } from '@apollo/client';
-import { CartProduct, ColoredCartProduct } from 'domain/types';
 import { useMemo } from 'react';
+import { ApolloError, gql, useQuery, useReactiveVar } from '@apollo/client';
 
+import { CartProduct, CartProductWQuantity, ColoredCartProduct } from 'domain/types';
 import { cartVar } from 'utils/apollo/cartVar';
 
 const GET_CART_PRODUCTS = gql`
@@ -65,7 +65,13 @@ type CartQueryResponse = {
   };
 };
 
-export const useCartProducts = () => {
+type CartProductsHookResult = {
+  loading: boolean;
+  error: ApolloError | undefined;
+  products: CartProductWQuantity[];
+};
+
+export const useCartProducts = (): CartProductsHookResult => {
   const cartItems = useReactiveVar(cartVar);
 
   const { loading, error, data } = useQuery<CartQueryResponse>(GET_CART_PRODUCTS, {
@@ -85,7 +91,7 @@ export const useCartProducts = () => {
     ssr: false
   });
 
-  const products = useMemo(
+  const productsNormalized = useMemo(
     () =>
       data
         ? [
@@ -96,10 +102,19 @@ export const useCartProducts = () => {
     [data]
   );
 
+  const productsWithQuantity = useMemo(
+    () =>
+      productsNormalized.map((product) => ({
+        ...product,
+        quantity: cartItems.find(({ id }) => id === product.sys.id)?.quantity || 0
+      })),
+    [productsNormalized, cartItems]
+  );
+
   return {
     loading,
     error,
-    products
+    products: productsWithQuantity
   };
 };
 
