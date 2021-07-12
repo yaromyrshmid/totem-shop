@@ -56,7 +56,7 @@ const addToCartItems = (previosCart: CartItem[], productId: string): Array<CartI
 
 const substractFromCartItems = (previosCart: CartItem[], productId: string): Array<CartItem> =>
   previosCart.map((item) => {
-    if (item.id === productId && item.quantity) return { ...item, quantity: item.quantity - 1 };
+    if (item.id === productId && item.quantity > 1) return { ...item, quantity: item.quantity - 1 };
 
     return item;
   });

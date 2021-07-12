@@ -20,7 +20,7 @@ const QuantityControls: React.FC<QuantityControlsProps> = ({
     <Box className={classes.container}>
       <Button
         onClick={onDecrease}
-        disabled={!quantity}
+        disabled={quantity <= 1}
         variant="outlined"
         color="primary"
         className={classes.button}
