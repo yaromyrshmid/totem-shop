@@ -10,7 +10,7 @@ import ColorPanel from 'components/product/ColorPanel';
 import BuyBlock from './BuyBlock/BuyBlock';
 import ProductDescription from './ProductDescription';
 import FeaturedProducts from 'components/product/FeaturedProducts/FeaturedProducts';
-import { addToCart } from 'utils/apollo/cartVar';
+import { addToCart } from 'utils/apollo/vars/cartVar';
 
 interface ProductProps {
   product: Product;

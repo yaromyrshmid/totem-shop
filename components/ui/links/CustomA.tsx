@@ -6,6 +6,8 @@ interface CustomAProps {
   children: React.ReactNode;
   className?: string;
   href?: string;
+  target?: string;
+  rel?: string;
 }
 
 type Ref = HTMLAnchorElement;

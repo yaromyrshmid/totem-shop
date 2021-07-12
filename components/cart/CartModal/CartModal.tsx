@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import Modal from 'components/ui/Modal';
 import { useCartProducts } from 'utils/hooks/useCartProducts';
-import { addToCart, substractFromCart, removeFromCart } from 'utils/apollo/cartVar';
+import { addToCart, substractFromCart, removeFromCart } from 'utils/apollo/vars/cartVar';
 import CartProduct from './CartProduct/CartProduct';
 import { countTotalPrice } from 'utils/helpers/countTotalPrice';
 import TotalPrice from './TotalPrice';

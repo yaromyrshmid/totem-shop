@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { ApolloError, gql, useQuery, useReactiveVar } from '@apollo/client';
 
 import { CartProduct, CartProductWQuantity, ColoredCartProduct } from 'domain/types';
-import { cartVar } from 'utils/apollo/cartVar';
+import { cartVar } from 'utils/apollo/vars/cartVar';
 
 const GET_CART_PRODUCTS = gql`
   query CartProductsQuery(

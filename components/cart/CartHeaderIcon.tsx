@@ -4,7 +4,7 @@ import { IconButton, Badge } from '@material-ui/core';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useReactiveVar } from '@apollo/client';
 
-import { cartVar } from 'utils/apollo/cartVar';
+import { cartVar } from 'utils/apollo/vars/cartVar';
 
 interface CartHeaderIconProps {
   onClick: () => void;
