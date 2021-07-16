@@ -6,3 +6,4 @@ export * from './Product';
 export * from './core';
 export * from './CartItem';
 export * from './CartProduct';
+export * from './DeliveryInfo';
