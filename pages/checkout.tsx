@@ -8,6 +8,7 @@ import CheckoutProductList from 'components/checkout/CheckoutProductList/Checkou
 import CheckoutHeader from 'components/checkout/CheckoutHeader';
 import { countTotalPrice } from 'utils/helpers/countTotalPrice';
 import { openCart } from 'utils/apollo/vars/showCartVar';
+import CheckoutStepper from 'components/checkout/CheckoutStepper/CheckoutStepper';
 
 interface CheckoutPageProps {
   pageMeta: PageMeta;
@@ -22,6 +23,8 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ pageMeta }): JSX.Element =>
         <CheckoutHeader total={countTotalPrice(products)} onEdit={openCart} />
 
         <CheckoutProductList products={products} />
+
+        <CheckoutStepper />
       </Container>
     </Layout>
   );

@@ -20,6 +20,7 @@ const CartModal: React.FC<CartModalProps> = ({ onClose, open }): JSX.Element => 
   const { products } = useCartProducts();
 
   const handleCheckout = () => {
+    onClose();
     push('/checkout');
   };
 
