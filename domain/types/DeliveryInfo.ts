@@ -1,6 +1,6 @@
+import { NovaPoshtaOffice } from './NovaPoshtaOffice';
+
 export type DeliveryInfo = {
   method: string;
-  details: NovaPoshtaDeliveryDetails;
+  details: NovaPoshtaOffice;
 };
-
-export type NovaPoshtaDeliveryDetails = {};

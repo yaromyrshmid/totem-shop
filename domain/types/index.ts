@@ -8,3 +8,4 @@ export * from './CartItem';
 export * from './CartProduct';
 export * from './DeliveryInfo';
 export * from './NovaPoshtaCity';
+export * from './NovaPoshtaOffice';
