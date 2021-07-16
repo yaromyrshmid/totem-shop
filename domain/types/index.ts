@@ -7,3 +7,4 @@ export * from './core';
 export * from './CartItem';
 export * from './CartProduct';
 export * from './DeliveryInfo';
+export * from './NovaPoshtaCity';

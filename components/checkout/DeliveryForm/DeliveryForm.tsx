@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@material-ui/core';
 import { DeliveryMethod } from 'domain/enums';
 import { DeliveryInfo, NovaPoshtaDeliveryDetails } from 'domain/types';
+import NovaPoshtaForm from './NovaPoshtaForm';
 
 interface DeliveryFormProps {
   onSubmit: (deliveryInfo: DeliveryInfo) => void;
@@ -18,21 +19,25 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onSubmit }): JSX.Element =>
   };
 
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">Метод доставки</FormLabel>
-      <RadioGroup
-        aria-label="delivery"
-        name="delivery"
-        value={deliveryMethod}
-        onChange={handleChange}
-      >
-        <FormControlLabel
-          value={DeliveryMethod.NEW_POST_OFFICE}
-          control={<Radio />}
-          label="У відділення Нової Пошти"
-        />
-      </RadioGroup>
-    </FormControl>
+    <>
+      <FormControl component="fieldset">
+        <FormLabel component="legend">Метод доставки</FormLabel>
+        <RadioGroup
+          aria-label="delivery"
+          name="delivery"
+          value={deliveryMethod}
+          onChange={handleChange}
+        >
+          <FormControlLabel
+            value={DeliveryMethod.NEW_POST_OFFICE}
+            control={<Radio />}
+            label="У відділення Нової Пошти"
+          />
+        </RadioGroup>
+      </FormControl>
+
+      {deliveryMethod === DeliveryMethod.NEW_POST_OFFICE && <NovaPoshtaForm />}
+    </>
   );
 };
 

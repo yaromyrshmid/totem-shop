@@ -7,7 +7,7 @@ import DeliveryForm from '../DeliveryForm/DeliveryForm';
 import { DeliveryInfo } from 'domain/types';
 
 const CheckoutStepper: React.FC = (): JSX.Element => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo | null>(null);
   const [deliveryInfo, setDeliveryInfo] = useState<DeliveryInfo | null>(null);
 
